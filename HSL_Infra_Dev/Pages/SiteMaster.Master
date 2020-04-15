@@ -20,7 +20,7 @@
 
     <%-- TEST DIV --%>
     <div id="mySidebar" class="sidebar">
-        <a href="ItemMaster.aspx">ITEMS MASTER</a>
+        <a href="UOMMasterPage.aspx">ITEMS MASTER</a>
         <a href="DepartmentPage.aspx">DEPARTMENT MASTER</a>
         <a href="#">Clients</a>
         <a href="#">Contact</a>

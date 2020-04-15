@@ -10,33 +10,36 @@ using System.Web;
 
 namespace HSL_Infra_Dev.Services
 {
-    public class DepartmentImpl:IDepartment
+    public class UOMImpl:IUOM
     {
-        public List<Department> GetDepartment()
+        public List<UOM> GetUOMs()
         {
             using (SqlConnection connGetDistrict = ConnectionProvider.GetConnection())
             {
                 try
                 {
-                    SqlCommand cmdDistrict = new SqlCommand("SP_Department", connGetDistrict);
+                    SqlCommand cmdDistrict = new SqlCommand("SP_UOM", connGetDistrict);
                     cmdDistrict.CommandType = CommandType.StoredProcedure;
                     cmdDistrict.CommandTimeout = 250;
-                    cmdDistrict.Parameters.Add("@flag", SqlDbType.Char).Value = "GetAllDepartments";
+                    cmdDistrict.Parameters.Add("@flag", SqlDbType.Char).Value = "GetAllUOMs";
 
                     SqlDataAdapter da = new SqlDataAdapter(cmdDistrict);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
-                    List<Department> departmentList = new List<Department>();
-                    departmentList = (from DataRow dr in dt.Rows
-                                   select new Department()
-                                   {
-                                       Id = Convert.ToInt32(dr["DEPARTMENT_ID"]),
-                                       Department_Description = dr["DEPARTMENT_DESC"].ToString(),
-                                       Is_Active = Convert.ToBoolean(dr["ISACTIVE"]),
-                                       Created_Date = Convert.ToDateTime(dr["CREATED_DATE"]),
-                                       Updated_Date = Convert.ToDateTime(dr["MODIFIED_DATE"])
-                                   }).ToList();
-                    return departmentList;
+                    List<UOM> uomList = new List<UOM>();
+                    uomList = (from DataRow dr in dt.Rows
+                                      select new UOM()
+                                      {
+                                          Id = Convert.ToInt32(dr["UOM_ID"]),
+                                          uom_key = dr["UOM_NAME"].ToString(),
+                                          uom_desc = dr["UOM_DESC"].ToString(),
+                                          unit_factor=Convert.ToInt32(dr["UNIT_FACTOR"]),
+                                          min_conversion=Convert.ToInt32(dr["MIN_CONVERTION"]),
+                                          is_active=Convert.ToBoolean(dr["ISACTIVE"]),
+                                          created_date = Convert.ToDateTime(dr["CREATED_DATE"]),
+                                          updated_date = Convert.ToDateTime(dr["MODIFIED_DATE"])
+                                      }).ToList();
+                    return uomList;
                 }
                 catch (Exception ex)
                 {
@@ -50,29 +53,32 @@ namespace HSL_Infra_Dev.Services
             }
         }
 
-        public Department GetDepartment(int DepartmentId)
+        public UOM GetUOM(int Uom_Id)
         {
             using (SqlConnection connGetDistrict = ConnectionProvider.GetConnection())
             {
                 try
                 {
-                    SqlCommand cmdDistrict = new SqlCommand("SP_Department", connGetDistrict);
+                    SqlCommand cmdDistrict = new SqlCommand("SP_UOM", connGetDistrict);
                     cmdDistrict.CommandType = CommandType.StoredProcedure;
                     cmdDistrict.CommandTimeout = 250;
-                    cmdDistrict.Parameters.Add("@flag", SqlDbType.Char).Value = "GetDepartmentById";
-                    cmdDistrict.Parameters.Add("@DEPARTMENT_ID", SqlDbType.Char).Value = DepartmentId;
+                    cmdDistrict.Parameters.Add("@flag", SqlDbType.Char).Value = "GetUomById";
+                    cmdDistrict.Parameters.Add("@UOM_ID", SqlDbType.Char).Value = Uom_Id;
 
                     SqlDataAdapter da = new SqlDataAdapter(cmdDistrict);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
-                    Department department = new Department();
-                    foreach(DataRow row in dt.Rows)
+                    UOM uom = new UOM();
+                    foreach (DataRow row in dt.Rows)
                     {
-                        department.Id = Convert.ToInt32(row["ID"]);
-                        department.Department_Description = row["DEPARTMENT_DESC"].ToString();
-                        department.Is_Active = Convert.ToBoolean(row["ISACTIVE"]);
+                        uom.Id = Convert.ToInt32(row["UOM_ID"]);
+                        uom.uom_key = row["UOM_NAME"].ToString();
+                        uom.uom_desc = row["UOM_DESC"].ToString();
+                        uom.unit_factor = Convert.ToInt32(row["UNIT_FACTOR"]);
+                        uom.min_conversion = Convert.ToInt32(row["MIN_CONVERSION"]);
+                        uom.is_active = Convert.ToBoolean(row["ISACTIVE"]);
                     }
-                    return department;
+                    return uom;
                 }
                 catch (Exception ex)
                 {
@@ -86,24 +92,27 @@ namespace HSL_Infra_Dev.Services
             }
         }
 
-        public string CreateDepartment(Department departments)
+        public string CreateUom(UOM uom)
         {
             using (SqlConnection connGetDistrict = ConnectionProvider.GetConnection())
             {
                 try
                 {
-                    SqlCommand cmdDistrict = new SqlCommand("SP_Department", connGetDistrict);
+                    SqlCommand cmdDistrict = new SqlCommand("SP_UOM", connGetDistrict);
                     cmdDistrict.CommandType = CommandType.StoredProcedure;
                     cmdDistrict.CommandTimeout = 250;
-                    cmdDistrict.Parameters.Add("@flag", SqlDbType.Char).Value = "CreateDepartment";
-                    cmdDistrict.Parameters.Add("@DEPARTMENT_DESC", SqlDbType.Char).Value = departments.Department_Description;
-                    cmdDistrict.Parameters.Add("@ISACTIVE", SqlDbType.Char).Value = departments.Is_Active?"1":"0";
+                    cmdDistrict.Parameters.Add("@flag", SqlDbType.Char).Value = "CreateUom";
+                    cmdDistrict.Parameters.Add("@UOM_NAME", SqlDbType.Char).Value = uom.uom_key;
+                    cmdDistrict.Parameters.Add("@UOM_DESC", SqlDbType.Char).Value = uom.uom_desc;
+                    cmdDistrict.Parameters.Add("@UNIT_FACTOR", SqlDbType.Char).Value = uom.unit_factor;
+                    cmdDistrict.Parameters.Add("@MIN_CONVERTION", SqlDbType.Char).Value = uom.min_conversion;
+                    cmdDistrict.Parameters.Add("@ISACTIVE", SqlDbType.Char).Value = uom.is_active ? "1" : "0";
 
                     SqlDataAdapter da = new SqlDataAdapter(cmdDistrict);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
                     string result = dt.Rows[0]["Result"].ToString();
-                    
+
                     return result;
                 }
                 catch (Exception ex)
@@ -118,17 +127,17 @@ namespace HSL_Infra_Dev.Services
             }
         }
 
-        public int DeleteDepartment(int department_id)
+        public int DeleteUom(int Uom_Id)
         {
             using (SqlConnection connGetDistrict = ConnectionProvider.GetConnection())
             {
                 try
                 {
-                    SqlCommand cmdDistrict = new SqlCommand("SP_Department", connGetDistrict);
+                    SqlCommand cmdDistrict = new SqlCommand("SP_UOM", connGetDistrict);
                     cmdDistrict.CommandType = CommandType.StoredProcedure;
                     cmdDistrict.CommandTimeout = 250;
-                    cmdDistrict.Parameters.Add("@flag", SqlDbType.Char).Value = "DeleteDepartment";
-                    cmdDistrict.Parameters.Add("@DEPARTMENT_ID", SqlDbType.Char).Value = department_id;
+                    cmdDistrict.Parameters.Add("@flag", SqlDbType.Char).Value = "DeleteUom";
+                    cmdDistrict.Parameters.Add("@UOM_ID", SqlDbType.Char).Value = Uom_Id;
                     int result = cmdDistrict.ExecuteNonQuery();
                     return result;
                 }
@@ -144,19 +153,22 @@ namespace HSL_Infra_Dev.Services
             }
         }
 
-        public string UpdateDepartment(Department departments)
+        public string UpdateUom(UOM uom)
         {
             using (SqlConnection connGetDistrict = ConnectionProvider.GetConnection())
             {
                 try
                 {
-                    SqlCommand cmdDistrict = new SqlCommand("SP_Department", connGetDistrict);
+                    SqlCommand cmdDistrict = new SqlCommand("SP_UOM", connGetDistrict);
                     cmdDistrict.CommandType = CommandType.StoredProcedure;
                     cmdDistrict.CommandTimeout = 250;
-                    cmdDistrict.Parameters.Add("@flag", SqlDbType.Char).Value = "UpdateDepartment";
-                    cmdDistrict.Parameters.Add("@DEPARTMENT_ID", SqlDbType.Char).Value = departments.Id;
-                    cmdDistrict.Parameters.Add("@DEPARTMENT_DESC", SqlDbType.Char).Value = departments.Department_Description;
-                    cmdDistrict.Parameters.Add("@ISACTIVE", SqlDbType.Char).Value = departments.Is_Active ? "1" : "0";
+                    cmdDistrict.Parameters.Add("@flag", SqlDbType.Char).Value = "UpdateUom";
+                    cmdDistrict.Parameters.Add("@UOM_ID", SqlDbType.Char).Value = uom.Id;
+                    cmdDistrict.Parameters.Add("@UOM_NAME", SqlDbType.Char).Value = uom.uom_key;
+                    cmdDistrict.Parameters.Add("@UOM_DESC", SqlDbType.Char).Value = uom.uom_desc;
+                    cmdDistrict.Parameters.Add("@UNIT_FACTOR", SqlDbType.Char).Value = uom.unit_factor;
+                    cmdDistrict.Parameters.Add("@MIN_CONVERTION", SqlDbType.Char).Value = uom.min_conversion;
+                    cmdDistrict.Parameters.Add("@ISACTIVE", SqlDbType.Char).Value = uom.is_active ? "1" : "0";
 
                     SqlDataAdapter da = new SqlDataAdapter(cmdDistrict);
                     DataTable dt = new DataTable();

@@ -12,5 +12,7 @@ namespace HSL_Infra_Dev.Interfaces
         List<Department> GetDepartment();
         Department GetDepartment(int DepartmentId);
         string CreateDepartment(Department department);
+        int DeleteDepartment(int department_id);
+        string UpdateDepartment(Department department);
     }
 }

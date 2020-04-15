@@ -1,5 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Pages/SiteMaster.Master" AutoEventWireup="true" CodeBehind="DepartmentPage.aspx.cs" Inherits="HSL_Infra_Dev.Pages.DepartmentPage" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Pages/SiteMaster.Master" AutoEventWireup="true" CodeBehind="UOMMasterPage.aspx.cs" Inherits="HSL_Infra_Dev.Pages.UOMMasterPage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="CPH1" runat="server">
@@ -22,16 +21,19 @@
         <form runat="server">
             <div class="container-fluid shadow-lg m-2 bg-white">
                 <div class="row">
-                    <h5 class="col align-items-centert m-1">DEPARTMENT MASTER</h5>
-                    <a id="btnNewItem" href="frmCreateBOM.aspx" class="btn btn-primary col-2 align-self-end m-1" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>&nbsp Create Department</a>
+                    <h5 class="col align-items-centert m-1">UNIT OF MEASUREMENT(UOM) MASTER</h5>
+                    <a id="btnNewItem" href="frmCreateBOM.aspx" class="btn btn-primary col-2 align-self-end m-1" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>&nbsp Add UOM</a>
                 </div>
                 <div class="row">
                     <div class="container-fluid">
                         <asp:GridView ID="grdvCrudOperation" runat="server" HorizontalAlign="Center"
                             AutoGenerateColumns="false" CssClass="table table-bordered table-sm table-striped table-hover">
                             <Columns>
-                                <asp:BoundField DataField="DEPARTMENT_ID" HeaderText="DEPARTMENT ID" />
-                                <asp:BoundField DataField="DEPARTMENT_DESC" HeaderText="DEPARTMENT DESCRIPTION" />
+                                <asp:BoundField DataField="UOM_ID" HeaderText="UOM ID" />
+                                <asp:BoundField DataField="UOM_KEY" HeaderText="UOM KEY" />
+                                <asp:BoundField DataField="UOM_DESC" HeaderText="UOM DESCRIPTION" />
+                                <asp:BoundField DataField="UNIT_FACTOR" HeaderText="UNIT FACTOR" />
+                                <asp:BoundField DataField="MIN_CONVERSION" HeaderText="MINIMUM CONVERSION" />
                                 <asp:BoundField DataField="ISACTIVE" HeaderText="ISACTIVE" />
                                 <asp:BoundField DataField="CREATED_DATE" HeaderText="CREATED DATE" />
                                 <asp:BoundField DataField="MODIFIED_DATE" HeaderText="MODIFIED DATE" />
@@ -62,13 +64,28 @@
                         <div class="modal-body">
                             <div class="container-fluid">
                                 <div class="row m-3">
-                                    <label for="txtitmdesc" class="w-50 text-right">Department ID: &nbsp</label>
-                                    <asp:TextBox ID="txt_DeptId" class="form-control-range w-50 rounded-0" runat="server" />
+                                    <label for="txtitmdesc" class="w-50 text-right">UOM ID: &nbsp</label>
+                                    <asp:TextBox ID="txt_uomid" class="form-control-range w-50 rounded-0" runat="server" />
                                 </div>
 
                                 <div class="row m-3">
-                                    <label for="txtuom" class="w-50 text-right">Department Description: &nbsp</label>
-                                    <asp:TextBox ID="txt_DeptDesc" class="form-control-range w-50 rounded-0" runat="server" />
+                                    <label for="txtitmdesc" class="w-50 text-right">UOM KEY: &nbsp</label>
+                                    <asp:TextBox ID="txt_uomkey" class="form-control-range w-50 rounded-0" runat="server" />
+                                </div>
+
+                                <div class="row m-3">
+                                    <label for="txtuom" class="w-50 text-right">UOM Description: &nbsp</label>
+                                    <asp:TextBox ID="txt_UomDesc" class="form-control-range w-50 rounded-0" runat="server" />
+                                </div>
+
+                                <div class="row m-3">
+                                    <label for="txtuom" class="w-50 text-right">Unit Factor: &nbsp</label>
+                                    <asp:TextBox ID="txt_unitfactor" class="form-control-range w-50 rounded-0" runat="server" />
+                                </div>
+
+                                <div class="row m-3">
+                                    <label for="txtuom" class="w-50 text-right">Minimum Conversion: &nbsp</label>
+                                    <asp:TextBox ID="txt_minconversion" class="form-control-range w-50 rounded-0" runat="server" />
                                 </div>
 
                                 <div class="row m-3">
@@ -103,8 +120,11 @@
             $(document).on("click", "[id*=edtRow]", function () {
                 var tableRow = $(this).closest("tr").find("td").eq(3).text();
                 console.log("data is" + $("[id*=txt_DeptId]").val());
-                $("[id*=txt_DeptId]").val($(this).closest("tr").find("td").eq(0).text());
-                $("[id*=txt_DeptDesc]").val($(this).closest("tr").find("td").eq(1).text());
+                $("[id*=txt_uomid]").val($(this).closest("tr").find("td").eq(0).text());
+                $("[id*=txt_uomkey]").val($(this).closest("tr").find("td").eq(1).text());
+                $("[id*=txt_UomDesc]").val($(this).closest("tr").find("td").eq(2).text());
+                $("[id*=txt_unitfactor]").val($(this).closest("tr").find("td").eq(3).text());
+                $("[id*=txt_minconversion]").val($(this).closest("tr").find("td").eq(4).text());
                 var cat = $(this).closest("tr").find("td").eq(3).text();
                 $("[id*=ddlitmcat] option").map(function () {
                     if ($(this).text() == cat) return this;
