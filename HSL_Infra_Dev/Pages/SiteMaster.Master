@@ -22,8 +22,9 @@
     <div id="mySidebar" class="sidebar">
         <a href="UOMMasterPage.aspx">ITEMS MASTER</a>
         <a href="DepartmentPage.aspx">DEPARTMENT MASTER</a>
-        <a href="#">Clients</a>
+        <a href="LocationPage.aspx">LOCATION MASTER</a>
         <a href="#">Contact</a>
+        <a href="#">Clients</a>
     </div>
 
     <div id="main">
