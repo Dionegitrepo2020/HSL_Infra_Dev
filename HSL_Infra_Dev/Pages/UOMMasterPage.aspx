@@ -26,14 +26,14 @@
                 </div>
                 <div class="row">
                     <div class="container-fluid">
-                        <asp:GridView ID="grdvCrudOperation" runat="server" HorizontalAlign="Center"
+                        <asp:GridView ID="grdvCrudOperation" runat="server" HorizontalAlign="Center" RowStyle-Wrap="false" HeaderStyle-Wrap="false"
                             AutoGenerateColumns="false" CssClass="table table-bordered table-sm table-striped table-hover">
                             <Columns>
                                 <asp:BoundField DataField="UOM_ID" HeaderText="UOM ID" />
-                                <asp:BoundField DataField="UOM_KEY" HeaderText="UOM KEY" />
+                                <asp:BoundField DataField="UOM_NAME" HeaderText="UOM KEY" />
                                 <asp:BoundField DataField="UOM_DESC" HeaderText="UOM DESCRIPTION" />
                                 <asp:BoundField DataField="UNIT_FACTOR" HeaderText="UNIT FACTOR" />
-                                <asp:BoundField DataField="MIN_CONVERSION" HeaderText="MINIMUM CONVERSION" />
+                                <asp:BoundField DataField="MIN_CONVERTION" HeaderText="MINIMUM CONVERSION" />
                                 <asp:BoundField DataField="ISACTIVE" HeaderText="ISACTIVE" />
                                 <asp:BoundField DataField="CREATED_DATE" HeaderText="CREATED DATE" />
                                 <asp:BoundField DataField="MODIFIED_DATE" HeaderText="MODIFIED DATE" />

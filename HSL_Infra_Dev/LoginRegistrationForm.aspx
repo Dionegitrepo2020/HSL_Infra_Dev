@@ -39,12 +39,14 @@
     <form id="form1" runat="server" class="container h-100 justify-content-center align-items-center mt-5">
         <div id="contents" class="row h-100 justify-content-center align-items-center mt-5">
             <div class="col-6 mt-5">
+                <div runat="server" id="ErrMsg" class="alert alert-danger" role="alert" visible="false">
+                    EXPIRED!!!
+                </div>
                 <div class="card mt-5">
                     <div class="card-header">
                         <label class="h3">Login</label>
                     </div>
                     <div class="card-body">
-
                         <div class="tab-content mt-3">
                             <%--Login Content--%>
                             <div class="tab-pane active" id="one" role="tabpanel" aria-labelledby="one-tab">
