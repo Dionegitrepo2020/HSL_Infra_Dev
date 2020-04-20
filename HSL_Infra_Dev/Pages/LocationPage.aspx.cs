@@ -20,8 +20,8 @@ namespace HSL_Infra_Dev.Pages
         protected void Page_Load(object sender, EventArgs e)
         {
             dataTable.Columns.Add("LOCATION_ID");
+            dataTable.Columns.Add("LOCATION_DESC");
             dataTable.Columns.Add("DEPARTMENT_ID");
-            dataTable.Columns.Add("DEPARTMENT_DESC");
             dataTable.Columns.Add("ISACTIVE");
             dataTable.Columns.Add("CREATED_DATE");
             dataTable.Columns.Add("MODIFIED_DATE");
@@ -30,8 +30,8 @@ namespace HSL_Infra_Dev.Pages
 
         private void LoadGridTable()
         {
-            List<Location> departments = location.GetLocation();
-            dataTable = converter.ToDataTable(departments, dataTable);
+            List<Location> locations = location.GetLocation();
+            dataTable = converter.ToDataTable(locations, dataTable);
             grdvCrudOperation.DataSource = dataTable;
             grdvCrudOperation.DataBind();
         }
