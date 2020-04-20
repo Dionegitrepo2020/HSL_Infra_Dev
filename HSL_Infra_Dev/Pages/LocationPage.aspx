@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Pages/SiteMaster.Master" AutoEventWireup="true" CodeBehind="LocationPage.aspx.cs" Inherits="HSL_Infra_Dev.Pages.LocationPage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Pages/SideBarMaster.Master" AutoEventWireup="true" CodeBehind="LocationPage.aspx.cs" Inherits="HSL_Infra_Dev.Pages.LocationPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -20,7 +20,7 @@
     </head>
     <body class="bg-light">
         <form runat="server">
-            <div class="container-fluid shadow-lg m-2 bg-white">
+            <div class="container-fluid shadow m-2 bg-white">
                 <div class="row">
                     <h5 class="col align-items-centert m-1">LOCATION MASTER</h5>
                     <a id="btnNewItem" href="frmCreateBOM.aspx" class="btn btn-primary col-2 align-self-end m-1" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>&nbsp Create Location</a>

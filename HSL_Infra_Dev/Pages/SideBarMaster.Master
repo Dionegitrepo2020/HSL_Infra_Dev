@@ -1,0 +1,174 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SideBarMaster.master.cs" Inherits="HSL_Infra_Dev.Pages.SideBarMaster" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Simple Sidebar - Start Bootstrap Template</title>
+    <link rel="stylesheet" href="../Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Styles/MasterSidebar.css" type="text/css" runat="server" />
+    <link rel="stylesheet" href="../Content/font-awesome.min.css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div class="page-wrapper chiller-theme toggled">
+        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+            <i class="fa fa-bars"></i>
+        </a>
+        <nav id="sidebar" class="sidebar-wrapper">
+            <div class="sidebar-content">
+                <div class="sidebar-brand">
+                    <a href="#">INFRA DEV</a>
+                    <div id="close-sidebar">
+                        <i class="fa fa-times"></i>
+                    </div>
+                </div>
+                <div class="sidebar-header">
+                    <div class="user-pic">
+                        <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+                            alt="User picture">
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">Jhon
+           
+                            <strong>Smith</strong>
+                        </span>
+                        <span class="user-role">Administrator</span>
+                        <span class="user-status"></span>
+                    </div>
+                </div>
+                <!-- sidebar-items  -->
+                <div class="sidebar-menu">
+                    <ul>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span>Masters</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="DepartmentPage.aspx">
+                                            <i class="fa fa-building"></i>
+                                            <span>Department</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="UOMMasterPage.aspx">
+                                            <i class="fa fa-balance-scale"></i>
+                                            <span>UOM</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="LocationPage.aspx">
+                                            <i class="fa fa-location-arrow"></i>
+                                            <span>Location</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="header-menu">
+                            <span>Transactions</span>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-cart-arrow-down"></i>
+                                <span>Material Request</span>
+                                <span class="badge badge-pill badge-primary">0</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-arrow-up"></i>
+                                <span>Material Issue</span>
+                                <span class="badge badge-pill badge-primary">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- sidebar-menu  -->
+            </div>
+            <!-- sidebar-content  -->
+            <div class="sidebar-footer">
+                <%--<a href="#">
+                    <i class="fa fa-bell"></i>
+                    <span class="badge badge-pill badge-warning notification">3</span>
+                </a>
+                <a href="#">
+                    <i class="fa fa-envelope"></i>
+                    <span class="badge badge-pill badge-success notification">7</span>
+                </a>
+                <a href="#">
+                    <i class="fa fa-cog"></i>
+                    <span class="badge-sonar"></span>
+                </a>--%>
+                <a href="#">
+                    <i class="fa fa-power-off">
+                        <span>Logout</span>
+                    </i>
+                </a>
+            </div>
+        </nav>
+        <!-- page - content  -->
+        <main class="page-content">
+            <div class="container-fluid">
+                <asp:ContentPlaceHolder ID="CPH1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+
+        </main>
+        <!-- page-content" -->
+    </div>
+    <!-- page-wrapper -->
+    <link rel="stylesheet" href="../Content/jquery-ui.css" />
+
+    <script src="../Scripts/bootstrap.bundle.min.js"></script>
+    <script src="../Scripts/popper.min.js"></script>
+    <script src="../Scripts/jquery-3.0.0.min.js"></script>
+
+    <script>
+        jQuery(function ($) {
+
+            $(".sidebar-dropdown > a").click(function () {
+                $(".sidebar-submenu").slideUp(200);
+                if (
+                    $(this)
+                        .parent()
+                        .hasClass("active")
+                ) {
+                    $(".sidebar-dropdown").removeClass("active");
+                    $(this)
+                        .parent()
+                        .removeClass("active");
+                } else {
+                    $(".sidebar-dropdown").removeClass("active");
+                    $(this)
+                        .next(".sidebar-submenu")
+                        .slideDown(200);
+                    $(this)
+                        .parent()
+                        .addClass("active");
+                }
+            });
+
+            $("#close-sidebar").click(function () {
+                $(".page-wrapper").removeClass("toggled");
+            });
+            $("#show-sidebar").click(function () {
+                $(".page-wrapper").addClass("toggled");
+            });
+
+
+
+
+        });
+    </script>
+</body>
+</html>

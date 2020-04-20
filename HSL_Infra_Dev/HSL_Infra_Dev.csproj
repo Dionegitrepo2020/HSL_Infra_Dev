@@ -113,6 +113,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Pages\SideBarMaster.Master" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -189,6 +190,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Styles\MasterSidebar.css" />
     <Content Include="Styles\sidebar.css" />
     <Content Include="Web.config" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -238,6 +240,13 @@
     </Compile>
     <Compile Include="Pages\LocationPage.aspx.designer.cs">
       <DependentUpon>LocationPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SideBarMaster.Master.cs">
+      <DependentUpon>SideBarMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\SideBarMaster.Master.designer.cs">
+      <DependentUpon>SideBarMaster.Master</DependentUpon>
     </Compile>
     <Compile Include="Pages\SiteMaster.Master.cs">
       <DependentUpon>SiteMaster.Master</DependentUpon>

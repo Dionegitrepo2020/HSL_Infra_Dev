@@ -11,7 +11,7 @@
 
     <title>Simple Sidebar - Start Bootstrap Template</title>
     <link rel="stylesheet" href="../Content/bootstrap.min.css" />
-    <link rel="stylesheet" href="../Styles/sidebar.css" />
+    <link rel="stylesheet" href="~/Styles/sidebar.css" type="text/css" runat="server" />
     <link rel="stylesheet" href="../Content/font-awesome.min.css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -20,16 +20,23 @@
 
     <%-- TEST DIV --%>
     <div id="mySidebar" class="sidebar">
+        <div style="background-color:darksalmon">
+            <div class="row">
+                <a class="fa fa-amazon" style="width:80px;height:80px;" runat="server" />
+                <label>Name Of User</label>
+            </div>
+            <button class="btn btn-sm m-1">Edit</button>
+        </div>
         <a href="UOMMasterPage.aspx">UOM MASTER</a>
         <a href="DepartmentPage.aspx">DEPARTMENT MASTER</a>
         <a href="LocationPage.aspx">LOCATION MASTER</a>
-        <a href="#">Contact</a>
+        <a href="#">ITEM MASTER</a>
         <a href="#">Clients</a>
     </div>
 
     <div id="main">
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-            <button class="btn bg-transparent p-0 m-0" onclick="closeNav()" id="menu-togglex" style="visibility:collapse">x</button>
+            <button class="btn bg-transparent p-0 m-0" onclick="closeNav()" id="menu-togglex" style="visibility: collapse">x</button>
             <button class="btn bg-transparent" onclick="openNav()" id="menu-toggle">☰</button>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
