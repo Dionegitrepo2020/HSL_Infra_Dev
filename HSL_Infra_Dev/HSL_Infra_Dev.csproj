@@ -80,6 +80,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="LoginRegistrationForm.aspx" />
+    <Content Include="Pages\CompanyMaster.aspx" />
     <Content Include="Pages\Dashboard.aspx" />
     <Content Include="Pages\DepartmentPage.aspx" />
     <Content Include="Pages\LocationPage.aspx" />
@@ -190,8 +191,8 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Styles\feildset.css" />
     <Content Include="Styles\MasterSidebar.css" />
-    <Content Include="Styles\sidebar.css" />
     <Content Include="Web.config" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -207,6 +208,7 @@
   <ItemGroup>
     <Compile Include="Helpers\ConnectionProvider.cs" />
     <Compile Include="Helpers\ListtoDataTableConverter.cs" />
+    <Compile Include="Interfaces\ICompany.cs" />
     <Compile Include="Interfaces\IDepartment.cs" />
     <Compile Include="Interfaces\ILocation.cs" />
     <Compile Include="Interfaces\IUOM.cs" />
@@ -217,9 +219,18 @@
     <Compile Include="LoginRegistrationForm.aspx.designer.cs">
       <DependentUpon>LoginRegistrationForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\CompanyLicense.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\UOM.cs" />
+    <Compile Include="Pages\CompanyMaster.aspx.cs">
+      <DependentUpon>CompanyMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\CompanyMaster.aspx.designer.cs">
+      <DependentUpon>CompanyMaster.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -263,6 +274,7 @@
       <DependentUpon>UOMMasterPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CompanyImpl.cs" />
     <Compile Include="Services\DepartmentImpl.cs" />
     <Compile Include="Services\LocationImpl.cs" />
     <Compile Include="Services\UOMImpl.cs" />

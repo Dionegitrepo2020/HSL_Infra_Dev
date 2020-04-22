@@ -52,12 +52,12 @@
                             <div class="tab-pane active" id="one" role="tabpanel" aria-labelledby="one-tab">
                                 <div class="form-group">
                                     <label for="uname1">Username</label>
-                                    <input type="text" class="form-control" name="uname1" id="uname1" required="" />
+                                    <asp:TextBox runat="server" ID="txt_UserName" CssClass="form-control" required="true" />
                                     <div class="invalid-feedback">Please enter your username or email</div>
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input type="password" class="form-control" id="pwd1" required="" />
+                                    <asp:TextBox runat="server" ID="txt_Password" CssClass="form-control" TextMode="Password" required="true" />
                                     <div class="invalid-feedback">Please enter a password</div>
                                 </div>
                                 <button runat="server" onserverclick="btnLogin_ServerClick" type="submit" class="btn btn-success btn-lg float-right" id="btnLogin">Login</button>

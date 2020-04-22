@@ -11,7 +11,14 @@ namespace HSL_Infra_Dev.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["UserID"] == null)
+            {
+                Department.HRef = "#";
+                UOM.HRef = "#";
+                Location.HRef = "#";
+                MaterialIssue.HRef = "#";
+                MaterialRequest.HRef = "#";
+            }
         }
     }
 }

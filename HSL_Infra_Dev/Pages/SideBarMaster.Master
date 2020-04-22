@@ -54,19 +54,25 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="DepartmentPage.aspx">
+                                        <a href="CompanyMaster.aspx">
+                                            <i class="fa fa-building"></i>
+                                            <span>Company Profile</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a runat="server" id="Department" href="DepartmentPage.aspx">
                                             <i class="fa fa-building"></i>
                                             <span>Department</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="UOMMasterPage.aspx">
+                                        <a runat="server" id="UOM" href="UOMMasterPage.aspx">
                                             <i class="fa fa-balance-scale"></i>
                                             <span>UOM</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="LocationPage.aspx">
+                                        <a runat="server" id="Location" href="LocationPage.aspx">
                                             <i class="fa fa-location-arrow"></i>
                                             <span>Location</span>
                                         </a>
@@ -78,14 +84,14 @@
                             <span>Transactions</span>
                         </li>
                         <li>
-                            <a href="#">
+                            <a runat="server" id="MaterialRequest" href="#">
                                 <i class="fa fa-cart-arrow-down"></i>
                                 <span>Material Request</span>
                                 <span class="badge badge-pill badge-primary">0</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a runat="server" id="MaterialIssue" href="#">
                                 <i class="fa fa-arrow-up"></i>
                                 <span>Material Issue</span>
                                 <span class="badge badge-pill badge-primary">0</span>

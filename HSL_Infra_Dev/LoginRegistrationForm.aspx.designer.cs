@@ -33,6 +33,24 @@ namespace HSL_Infra_Dev
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ErrMsg;
 
         /// <summary>
+        /// txt_UserName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_UserName;
+
+        /// <summary>
+        /// txt_Password control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_Password;
+
+        /// <summary>
         /// btnLogin control.
         /// </summary>
         /// <remarks>

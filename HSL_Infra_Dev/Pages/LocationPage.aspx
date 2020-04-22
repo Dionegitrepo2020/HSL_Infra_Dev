@@ -27,7 +27,7 @@
                 </div>
                 <div class="row">
                     <div class="container-fluid">
-                        <asp:GridView ID="grdvCrudOperation" runat="server" HorizontalAlign="Center"
+                        <asp:GridView ID="grdvCrudOperation" runat="server" HorizontalAlign="Center" OnRowDataBound="grdvCrudOperation_RowDataBound"
                             AutoGenerateColumns="false" CssClass="table table-bordered table-sm table-striped table-hover">
                             <Columns>
                                 <asp:BoundField DataField="LOCATION_ID" HeaderText="LOCATION ID" />
@@ -74,7 +74,9 @@
 
                                 <div class="row m-3">
                                     <label for="txtdeptid" class="w-50 text-right">Department Id: &nbsp</label>
-                                    <asp:TextBox ID="txt_Departmentid" class="form-control-range w-50 rounded-0" runat="server" />
+                                    <asp:DropDownList runat="server" ID="ddlDepts" CssClass="dropdown">
+                                        <asp:ListItem Text="----Select Deprtment----" Value=""></asp:ListItem>
+                                    </asp:DropDownList>
                                 </div>
 
                                 <div class="row m-3">
@@ -109,10 +111,10 @@
             $(document).on("click", "[id*=edtRow]", function () {
                 var tableRow = $(this).closest("tr").find("td").eq(3).text();
                 console.log("data is" + $("[id*=txt_DeptId]").val());
-                $("[id*=txt_DeptId]").val($(this).closest("tr").find("td").eq(0).text());
-                $("[id*=txt_DeptDesc]").val($(this).closest("tr").find("td").eq(1).text());
-                var cat = $(this).closest("tr").find("td").eq(3).text();
-                $("[id*=ddlitmcat] option").map(function () {
+                $("[id*=txt_Locationid]").val($(this).closest("tr").find("td").eq(0).text());
+                $("[id*=txt_loationdesc]").val($(this).closest("tr").find("td").eq(1).text());
+                var cat = $(this).closest("tr").find("td").eq(2).text();
+                $("[id*=ddlDepts] option").map(function () {
                     if ($(this).text() == cat) return this;
                 }).prop('selected', true);
                 $("[id*=btnSave]").hide();
