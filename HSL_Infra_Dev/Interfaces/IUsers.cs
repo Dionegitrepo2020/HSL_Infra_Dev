@@ -12,5 +12,6 @@ namespace HSL_Infra_Dev.Interfaces
         string CheckAdminLogin(string UserId,string Password);
         string CheckUserLogin(string UserId, string Password);
         Users GetUsers(int UserId);
+        List<Users> GetUsers();
     }
 }
