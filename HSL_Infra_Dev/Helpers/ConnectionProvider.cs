@@ -24,5 +24,21 @@ namespace HSL_Infra_Dev.Helpers
             }
 
         }
+
+        public static SqlConnection GetServerConnection()
+        {
+            try
+            {
+                string strConnection = ConfigurationManager.ConnectionStrings["ServerConnection"].ConnectionString;
+                SqlConnection conn = new SqlConnection(strConnection);
+                conn.Open();
+                return conn;
+            }
+            catch (SqlException e)
+            {
+                return null;
+            }
+
+        }
     }
 }

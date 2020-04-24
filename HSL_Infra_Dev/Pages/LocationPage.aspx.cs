@@ -16,6 +16,7 @@ namespace HSL_Infra_Dev.Pages
     {
         DataTable dataTable = new DataTable();
         ILocation location = new LocationImpl();
+        IDepartment departmentService = new DepartmentImpl();
         ListtoDataTableConverter converter = new ListtoDataTableConverter();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,6 +27,17 @@ namespace HSL_Infra_Dev.Pages
             dataTable.Columns.Add("CREATED_DATE");
             dataTable.Columns.Add("MODIFIED_DATE");
             LoadGridTable();
+            LoadDepartments();
+        }
+
+        private void LoadDepartments()
+        {
+            List<Department> departments = new List<Department>();
+            departments = departmentService.GetDepartment();
+            foreach(var dept in departments)
+            {
+                ddlDepts.Items.Add(new ListItem(dept.Department_Description,dept.Id.ToString()));
+            }
         }
 
         private void LoadGridTable()
@@ -40,7 +52,7 @@ namespace HSL_Infra_Dev.Pages
         {
             Location locations = new Location();
             locations.Location_Description = txt_loationdesc.Text;
-            locations.Department_id = Convert.ToInt32(txt_Departmentid.Text);
+            locations.Department_id = Convert.ToInt32(ddlDepts.SelectedItem.Value);
             locations.Is_Active = chkActive.Checked ? true : false;
             string result = location.CreateLocation(locations);
             dataTable.Rows.Clear();
@@ -72,7 +84,7 @@ namespace HSL_Infra_Dev.Pages
             Location locations = new Location();
             locations.Id = Convert.ToInt32(txt_Locationid.Text);
             locations.Location_Description= txt_loationdesc.Text;
-            locations.Department_id = Convert.ToInt32(txt_Departmentid.Text);
+            locations.Department_id = Convert.ToInt32(ddlDepts.SelectedItem.Value);
             locations.Is_Active = chkActive.Checked ? true : false;
             string result = location.UpdateLocation(locations);
             if (result.Equals("Updated"))
@@ -87,5 +99,23 @@ namespace HSL_Infra_Dev.Pages
                         "alert('Something went wrong');", true);
         }
 
+        protected void grdvCrudOperation_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                    TableCell deptCell = e.Row.Cells[2];
+                    Department department = departmentService.GetDepartment(Convert.ToInt32(deptCell.Text));
+                    deptCell.Text = department.Department_Description;
+                //TableCell statusCell = e.Row.Cells[2];
+                //if (statusCell.Text == "A")
+                //{
+                //    statusCell.Text = "Absent";
+                //}
+                //if (statusCell.Text == "P")
+                //{
+                //    statusCell.Text = "Present";
+                //}
+            }
         }
+    }
 }

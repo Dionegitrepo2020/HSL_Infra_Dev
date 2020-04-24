@@ -28,6 +28,5 @@ namespace HSL_Infra_Dev.Helpers
             return dataTable;
 
         }
-
     }
 }

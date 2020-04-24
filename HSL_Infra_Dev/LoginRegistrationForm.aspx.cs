@@ -38,7 +38,16 @@ namespace HSL_Infra_Dev
 
         protected void btnLogin_ServerClick(object sender, EventArgs e)
         {
-            Response.Redirect("Pages/Dashboard.aspx");
+            if(txt_UserName.Text=="admin" && txt_Password.Text == "admin")
+            {
+                Session["UserID"] = null;
+                Response.Redirect("Pages/Dashboard.aspx");
+            }
+            else
+            {
+                Session["UserID"] = "1001";
+                Response.Redirect("Pages/Dashboard.aspx");
+            }
         }
     }
 }

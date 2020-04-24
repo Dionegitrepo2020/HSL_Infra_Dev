@@ -68,7 +68,7 @@ namespace HSL_Infra_Dev.Services
                     Department department = new Department();
                     foreach(DataRow row in dt.Rows)
                     {
-                        department.Id = Convert.ToInt32(row["ID"]);
+                        department.Id = Convert.ToInt32(row["DEPARTMENT_ID"]);
                         department.Department_Description = row["DEPARTMENT_DESC"].ToString();
                         department.Is_Active = Convert.ToBoolean(row["ISACTIVE"]);
                     }
