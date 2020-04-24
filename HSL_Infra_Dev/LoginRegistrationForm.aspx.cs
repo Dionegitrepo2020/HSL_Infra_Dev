@@ -18,10 +18,10 @@ namespace HSL_Infra_Dev
         int max;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
-                ShowMessage();
-            }
+            //if (!Page.IsPostBack)
+            //{
+            //    ShowMessage();
+            //}
         }
 
         private void ShowMessage()
