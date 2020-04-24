@@ -62,10 +62,10 @@
                                             <h2 class="fs-title">Address Information <span><i id="fdset3edit" class="fa fa-pencil" style="color:darkturquoise"></i></span></h2>
                                             <asp:TextBox runat="server" ID="txt_userid" placeholder="User Id" ReadOnly="true" />
                                             <asp:TextBox runat="server" ID="txt_password" placeholder="Password" ReadOnly="true" />
-                                            <asp:TextBox runat="server" ID="txt_confpassword" placeholder="Confirm Password" ReadOnly="true" />
+                                            <%--<asp:TextBox runat="server" ID="txt_confpassword" placeholder="Confirm Password" ReadOnly="true" />--%>
                                         </div>
                                         <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                                        <input type="button" name="make_payment" class="next action-button" value="Confirm" />
+                                        <input type="button" name="make_payment" class="next action-button" value="Next Step" />
                                     </fieldset>
                                     <fieldset>
                                         <div class="form-card">
@@ -86,7 +86,7 @@
                                             </table>
                                         </div>
                                         <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                                        <input type="button" name="make_payment" class="next action-button" value="Confirm" />
+                                        <input type="button" runat="server" name="make_payment" class="next action-button submit" value="Confirm" />
                                     </fieldset>
                                     <fieldset>
                                         <div class="form-card">
@@ -102,7 +102,7 @@
                                             <br>
                                             <div class="row justify-content-center">
                                                 <div class="col-7 text-center">
-                                                    <h5>You Have Successfully Signed Up</h5>
+                                                    <asp:Button runat="server" Text="Submit" CssClass="btn btn-success" OnClick="Unnamed_ServerClick" />
                                                 </div>
                                             </div>
                                         </div>
@@ -182,7 +182,7 @@
                 $(".submit").click(function () {
                     return false;
                 })
-
+                // Enabling fieldset 1 for edit
                 $("#fdset1edit").click(function () {
                     $(this).hide();
                     $("[id*=txt_CompName]").attr('readonly', false);
@@ -191,20 +191,20 @@
                     $("[id*=txt_City]").attr('readonly', false);
                     $("[id*=txt_Zip]").attr('readonly', false);
                 })
-
+                // Enabling fieldset 2 for edit
                 $("#fdset2edit").click(function () {
                     $(this).hide();
                     $("[id*=txt_Email]").attr('readonly', false);
                     $("[id*=txt_Telephone]").attr('readonly', false);
                 })
-
+                // Enabling fieldset 3 for edit
                 $("#fdset3edit").click(function () {
                     $(this).hide();
                     $("[id*=txt_userid]").attr('readonly', false);
                     $("[id*=txt_password]").attr('readonly', false);
                     $("[id*=txt_confpassword]").attr('readonly', false);
                 })
-
+                // Enabling fieldset 4 for edit
                 $("#fdset4edit").click(function () {
                     $(this).hide();
                     $("[id*=txt_InventoryKey]").attr('readonly', false);

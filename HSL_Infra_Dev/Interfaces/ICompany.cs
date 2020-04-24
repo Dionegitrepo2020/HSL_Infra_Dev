@@ -10,5 +10,6 @@ namespace HSL_Infra_Dev.Interfaces
     public interface ICompany
     {
         Company GetCompany(int Id);
+        string UpdateCompany(Company company);
     }
 }

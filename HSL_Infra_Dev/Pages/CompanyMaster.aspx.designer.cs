@@ -114,15 +114,6 @@ namespace HSL_Infra_Dev.Pages
         protected global::System.Web.UI.WebControls.TextBox txt_password;
 
         /// <summary>
-        /// txt_confpassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_confpassword;
-
-        /// <summary>
         /// txt_InventoryKey control.
         /// </summary>
         /// <remarks>

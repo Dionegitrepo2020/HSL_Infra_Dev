@@ -45,6 +45,7 @@ namespace HSL_Infra_Dev
             }
             else
             {
+                Session["UserID"] = "1001";
                 Response.Redirect("Pages/Dashboard.aspx");
             }
         }
