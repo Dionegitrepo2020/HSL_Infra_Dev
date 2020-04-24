@@ -71,6 +71,12 @@
                                             <span>Location</span>
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="UsersPage.aspx">
+                                            <i class="fa fa-location-arrow"></i>
+                                            <span>Users</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
