@@ -60,6 +60,7 @@
                                     <asp:TextBox runat="server" ID="txt_Password" CssClass="form-control" TextMode="Password" required="true" />
                                     <div class="invalid-feedback">Please enter a password</div>
                                 </div>
+                                <asp:CheckBox runat="server" CssClass="custom-checkbox" Text="Login as admin" ID="chkAdmin" />
                                 <button runat="server" onserverclick="btnLogin_ServerClick" type="submit" class="btn btn-success btn-lg float-right" id="btnLogin">Login</button>
 
                             </div>

@@ -87,6 +87,8 @@ namespace HSL_Infra_Dev.Pages
             company.CompanyLicense = licenseList;
             string result= companyService.UpdateCompany(company);
             MessageBox.Show(result);
+            MessageBox.Show("You need to login again to apply changes");
+            Response.Redirect("~/LoginRegistrationForm.aspx");
         }
     }
 }
