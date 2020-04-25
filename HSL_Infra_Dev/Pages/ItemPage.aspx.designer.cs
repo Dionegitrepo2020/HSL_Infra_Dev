@@ -11,79 +11,70 @@ namespace HSL_Infra_Dev.Pages
 {
 
 
-    public partial class SideBarMaster
+    public partial class ItemPage
     {
 
         /// <summary>
-        /// head control.
+        /// grdvCrudOperation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.GridView grdvCrudOperation;
 
         /// <summary>
-        /// Department control.
+        /// lnkDummy control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor Department;
+        protected global::System.Web.UI.WebControls.LinkButton lnkDummy;
 
         /// <summary>
-        /// UOM control.
+        /// txt_Itemid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor UOM;
+        protected global::System.Web.UI.WebControls.TextBox txt_Itemid;
 
         /// <summary>
-        /// Location control.
+        /// txt_Itemdesc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor Location;
+        protected global::System.Web.UI.WebControls.TextBox txt_Itemdesc;
 
         /// <summary>
-        /// Items control.
+        /// ddluom control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor Items;
+        protected global::System.Web.UI.WebControls.DropDownList ddluom;
 
         /// <summary>
-        /// MaterialRequest control.
+        /// btnSave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor MaterialRequest;
+        protected global::System.Web.UI.WebControls.Button btnSave;
 
         /// <summary>
-        /// MaterialIssue control.
+        /// btnUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor MaterialIssue;
-
-        /// <summary>
-        /// CPH1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder CPH1;
+        protected global::System.Web.UI.WebControls.Button btnUpdate;
     }
 }

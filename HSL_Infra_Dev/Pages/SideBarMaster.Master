@@ -78,6 +78,12 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a runat="server" id="Items" href="ItemPage.aspx">
+                                            <i class="fa fa-location-arrow"></i>
+                                            <span>Item</span>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="UsersPage.aspx">
                                             <i class="fa fa-location-arrow"></i>
                                             <span>Users</span>
