@@ -26,7 +26,6 @@ namespace HSL_Infra_Dev.Helpers
             }
             //put a breakpoint here and check datatable
             return dataTable;
-
         }
     }
 }

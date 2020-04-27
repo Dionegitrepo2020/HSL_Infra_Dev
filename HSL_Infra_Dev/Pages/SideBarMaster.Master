@@ -78,7 +78,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="UsersPage.aspx">
+                                        <a href="UsersMaster.aspx">
                                             <i class="fa fa-location-arrow"></i>
                                             <span>Users</span>
                                         </a>
