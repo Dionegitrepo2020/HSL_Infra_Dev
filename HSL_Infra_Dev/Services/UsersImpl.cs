@@ -35,7 +35,7 @@ namespace HSL_Infra_Dev.Services
                 }
                 catch (Exception ex)
                 {
-                    return null;
+                    return ex.ToString();
                 }
                 finally
                 {
@@ -68,7 +68,7 @@ namespace HSL_Infra_Dev.Services
                 }
                 catch (Exception ex)
                 {
-                    return null;
+                    return ex.ToString();
                 }
                 finally
                 {

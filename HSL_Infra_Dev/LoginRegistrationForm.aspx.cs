@@ -15,31 +15,11 @@ namespace HSL_Infra_Dev
     {
         IUsers userService = new UsersImpl();
         ICompany companyService = new CompanyImpl();
-        int max;
+        int countSession = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (!Page.IsPostBack)
-            //{
-            //    ShowMessage();
-            //}
+            
         }
-
-        private void ShowMessage()
-        {
-            DateTime ExpDate = Convert.ToDateTime(ConfigurationManager.AppSettings["ExpDate"].ToString());
-            DateTime CurDate = Convert.ToDateTime(DateTime.Now.ToShortDateString());
-            TimeSpan t = ExpDate - CurDate;
-            double days = t.TotalDays;
-            if (days > 0)
-            {
-
-            }
-            //else
-            //{ ErrMsg.Visible = true; }
-            int webmax = Convert.ToInt32(ConfigurationManager.AppSettings["max"]);
-            webmax += 1;
-        }
-
         protected void btnLogin_ServerClick(object sender, EventArgs e)
         {
             if (txt_UserName.Text == "admin" && txt_Password.Text == "admin")
@@ -59,6 +39,7 @@ namespace HSL_Infra_Dev
                     Company company = companyService.GetCompany(Convert.ToInt32(Result));
                     Session["UserID"] = company.Id;
                     Session["CompanyID"] = company.Id;
+                    CheckLimit();
                     Response.Redirect("Pages/Dashboard.aspx");
                 }
             }
@@ -75,6 +56,21 @@ namespace HSL_Infra_Dev
                     Session["CompanyID"] = users.Company_Id;
                     Response.Redirect("Pages/Dashboard.aspx");
                 }
+            }
+        }
+
+        private void CheckLimit()
+        {
+            if (Session["LIMIT"] != null)
+            {
+                countSession++;
+                Session["Count"] = countSession;
+            }
+            else
+            {
+                countSession = 0;
+                countSession++;
+                Session["Count"] = countSession;
             }
         }
     }
