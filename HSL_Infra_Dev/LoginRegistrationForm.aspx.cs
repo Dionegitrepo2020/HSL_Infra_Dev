@@ -15,10 +15,10 @@ namespace HSL_Infra_Dev
     {
         IUsers userService = new UsersImpl();
         ICompany companyService = new CompanyImpl();
-        int countSession = 0;
+        ILogin loginService = new LoginService();
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
         protected void btnLogin_ServerClick(object sender, EventArgs e)
         {
@@ -26,6 +26,7 @@ namespace HSL_Infra_Dev
             {
                 Session["UserID"] = null;
                 Session["CompanyID"] = null;
+                Session["IsRegisteredUser"] = false;
                 Response.Redirect("Pages/Dashboard.aspx");
             }
             else if (chkAdmin.Checked)
@@ -39,8 +40,11 @@ namespace HSL_Infra_Dev
                     Company company = companyService.GetCompany(Convert.ToInt32(Result));
                     Session["UserID"] = company.Id;
                     Session["CompanyID"] = company.Id;
-                    CheckLimit();
-                    Response.Redirect("Pages/Dashboard.aspx");
+                    if (CheckLimit(company.Id, company.Id))
+                        Response.Redirect("Pages/Dashboard.aspx");
+                    else
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Failed",
+                        "alert('Maximum Number of Users LoggedIn');", true);
                 }
             }
             else
@@ -54,24 +58,22 @@ namespace HSL_Infra_Dev
                     Users users = userService.GetUsers(Convert.ToInt32(Result));
                     Session["UserID"] = users.User_Id;
                     Session["CompanyID"] = users.Company_Id;
-                    Response.Redirect("Pages/Dashboard.aspx");
+                    if (CheckLimit(users.User_Id, users.Company_Id))
+                        Response.Redirect("Pages/Dashboard.aspx");
+                    else
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Failed",
+                        "alert('Maximum Number of Users LoggedIn');", true);
                 }
             }
         }
 
-        private void CheckLimit()
+        private bool CheckLimit(int UserId, int CompanyId)
         {
-            if (Session["LIMIT"] != null)
-            {
-                countSession++;
-                Session["Count"] = countSession;
-            }
-            else
-            {
-                countSession = 0;
-                countSession++;
-                Session["Count"] = countSession;
-            }
+            LoginLog login = new LoginLog();
+            login.CompanyId = CompanyId;
+            login.UserId = UserId;
+            bool inserted = loginService.AddToCount(login);
+            return inserted;
         }
     }
 }
