@@ -86,6 +86,7 @@
     <Content Include="Pages\DepartmentPage.aspx" />
     <Content Include="Pages\ItemPage.aspx" />
     <Content Include="Pages\LocationPage.aspx" />
+    <Content Include="Pages\Logout.asmx" />
     <Content Include="Pages\UOMMasterPage.aspx" />
     <Content Include="Pages\UsersMaster.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -215,6 +216,7 @@
     <Compile Include="Interfaces\IDepartment.cs" />
     <Compile Include="Interfaces\IItem.cs" />
     <Compile Include="Interfaces\ILocation.cs" />
+    <Compile Include="Interfaces\ILogin.cs" />
     <Compile Include="Interfaces\IUOM.cs" />
     <Compile Include="Interfaces\IUsers.cs" />
     <Compile Include="LoginRegistrationForm.aspx.cs">
@@ -229,6 +231,7 @@
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Items.cs" />
     <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\LoginLog.cs" />
     <Compile Include="Models\UOM.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Pages\CompanyMaster.aspx.cs">
@@ -266,6 +269,10 @@
     <Compile Include="Pages\LocationPage.aspx.designer.cs">
       <DependentUpon>LocationPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Logout.asmx.cs">
+      <DependentUpon>Logout.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Pages\SideBarMaster.Master.cs">
       <DependentUpon>SideBarMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -299,6 +306,7 @@
     <Compile Include="Services\DepartmentImpl.cs" />
     <Compile Include="Services\ItemImpl.cs" />
     <Compile Include="Services\LocationImpl.cs" />
+    <Compile Include="Services\LoginService.cs" />
     <Compile Include="Services\UOMImpl.cs" />
     <Compile Include="Services\UsersImpl.cs" />
   </ItemGroup>

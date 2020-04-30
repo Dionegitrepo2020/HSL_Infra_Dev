@@ -13,6 +13,7 @@ namespace HSL_Infra_Dev.Pages
     public partial class SideBarMaster : System.Web.UI.MasterPage
     {
         ICompany companyService = new CompanyImpl();
+        ILogin loginService = new LoginService();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserID"] == null)
@@ -23,7 +24,7 @@ namespace HSL_Infra_Dev.Pages
                 MaterialIssue.HRef = "#";
                 MaterialRequest.HRef = "#";
             }
-            count.InnerHtml = Session["Count"].ToString();
+            if(Convert.ToBoolean(Session["IsRegisteredUser"])) CheckSessions();
             VisibilityAll(false);
             LoadNavItems();
         }
@@ -61,52 +62,38 @@ namespace HSL_Infra_Dev.Pages
                     EnableSales(true, true, true);
                 }
 
-                if (module.Product.Equals("Sale") && module.Status.Equals("New"))
+                switch (module.Product)
                 {
-                    saleAlert.Visible = true;
-                    saleAlert.InnerHtml = "Action Needed";
-                }else if(module.Product.Equals("Sale") && module.Status.Equals("Expired"))
-                {
-                    saleAlert.Visible = true;
-                    saleAlert.InnerHtml = "Expired";
-                }
-
-                if (module.Product.Equals("Purchase") && module.Status.Equals("New"))
-                {
-                    PurchaseAlert.Visible = true;
-                    PurchaseAlert.InnerHtml = "Action Needed";
-                }
-                else if (module.Product.Equals("Purchase") && module.Status.Equals("Expired"))
-                {
-                    PurchaseAlert.Visible = true;
-                    PurchaseAlert.InnerHtml = "Expired";
-                }
-
-                if (module.Product.Equals("Inventory") && module.Status.Equals("New"))
-                {
-                    InventoryAlert.Visible = true;
-                    InventoryAlert.InnerHtml = "Action Needed";
-                }
-                else if (module.Product.Equals("Inventory") && module.Status.Equals("Expired"))
-                {
-                    InventoryAlert.Visible = true;
-                    InventoryAlert.InnerHtml = "Expired";
-                }
-
-                if (MaterialRequest.Visible == false && MaterialIssue.Visible == false)
-                {
-                    InventoryAlert.Visible = true;
-                    InventoryAlert.InnerHtml = "Not Licensed";
-                }
-                if (P_Order.Visible == false && P_Receipt.Visible == false && P_Request.Visible == false)
-                {
-                    PurchaseAlert.Visible = true;
-                    PurchaseAlert.InnerHtml = "Not Licensed";
-                }
-                if (S_Qoutation.Visible == false&&S_Order.Visible==false&&S_Delivery.Visible==false)
-                {
-                    saleAlert.Visible = true;
-                    saleAlert.InnerHtml = "Not Licensed";
+                    case "Inventory":
+                        if (module.Product.Equals("Inventory") && module.Status.Equals("New"))
+                        {
+                            InventoryAlert.InnerHtml = "Action Needed";
+                        }
+                        else if (module.Product.Equals("Inventory") && module.Status.Equals("Expired"))
+                        {
+                            InventoryAlert.InnerHtml = "Expired";
+                        }
+                        break;
+                    case "Purchase":
+                        if (module.Product.Equals("Purchase") && module.Status.Equals("New"))
+                        {
+                            PurchaseAlert.InnerHtml = "Action Needed";
+                        }
+                        else if (module.Product.Equals("Purchase") && module.Status.Equals("Expired"))
+                        {
+                            PurchaseAlert.InnerHtml = "Expired";
+                        }
+                        break;
+                    case "Sale":
+                        if (module.Product.Equals("Sale") && module.Status.Equals("New"))
+                        {
+                            saleAlert.InnerHtml = "Action Needed";
+                        }
+                        else if (module.Product.Equals("Sale") && module.Status.Equals("Expired"))
+                        {
+                            saleAlert.InnerHtml = "Expired";
+                        }
+                        break;
                 }
             }
         }
@@ -115,6 +102,7 @@ namespace HSL_Infra_Dev.Pages
         {
             MaterialRequest.Visible = RequestVisible;
             MaterialIssue.Visible = IssueVisible;
+            InventoryAlert.Visible = false;
         }
 
         public void EnablePurchase(bool P_RequestVisible, bool P_OrderVisible, bool P_ReceiptVisible)
@@ -122,6 +110,7 @@ namespace HSL_Infra_Dev.Pages
             P_Request.Visible = P_RequestVisible;
             P_Order.Visible = P_OrderVisible;
             P_Receipt.Visible = P_ReceiptVisible;
+            PurchaseAlert.Visible = false;
         }
 
         public void EnableSales(bool S_QoutationVisible, bool S_OrderVisible, bool S_DeliveryVisible)
@@ -129,6 +118,27 @@ namespace HSL_Infra_Dev.Pages
             S_Qoutation.Visible = S_QoutationVisible;
             S_Order.Visible = S_OrderVisible;
             S_Delivery.Visible = S_DeliveryVisible;
+            saleAlert.Visible = false;
+        }
+
+        protected void btnLogout_ServerClick(object sender, EventArgs e)
+        {
+            LoginLog login = new LoginLog();
+            login.UserId =Convert.ToInt32(Session["UserID"]);
+            login.CompanyId = Convert.ToInt32(Session["CompanyID"]);
+            bool logout = loginService.RemoveFromCount(login);
+            if (logout)
+            {
+                Session["UserID"] = null;
+                Session["CompanyID"] = null;
+                CheckSessions();
+            }
+        }
+
+        private void CheckSessions()
+        {
+            if (Session["UserID"]==null&& Session["CompanyID"]==null)
+                Response.Redirect("~/LoginRegistrationForm.aspx");
         }
     }
 }

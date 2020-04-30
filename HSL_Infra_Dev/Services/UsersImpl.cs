@@ -87,7 +87,7 @@ namespace HSL_Infra_Dev.Services
                     cmdDistrict.CommandType = CommandType.StoredProcedure;
                     cmdDistrict.CommandTimeout = 250;
                     cmdDistrict.Parameters.Add("@flag", SqlDbType.Char).Value = "GetUserById";
-                    cmdDistrict.Parameters.Add("@USER_NAME", SqlDbType.Char).Value = UserId;
+                    cmdDistrict.Parameters.Add("@USER_ID", SqlDbType.Char).Value = UserId;
 
                     SqlDataAdapter da = new SqlDataAdapter(cmdDistrict);
                     DataTable dt = new DataTable();
