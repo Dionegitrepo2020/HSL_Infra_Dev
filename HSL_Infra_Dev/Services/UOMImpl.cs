@@ -75,7 +75,7 @@ namespace HSL_Infra_Dev.Services
                         uom.uom_key = row["UOM_NAME"].ToString();
                         uom.uom_desc = row["UOM_DESC"].ToString();
                         uom.unit_factor = Convert.ToInt32(row["UNIT_FACTOR"]);
-                        uom.min_conversion = Convert.ToInt32(row["MIN_CONVERSION"]);
+                        uom.min_conversion = Convert.ToInt32(row["MIN_CONVERTION"]);
                         uom.is_active = Convert.ToBoolean(row["ISACTIVE"]);
                     }
                     return uom;

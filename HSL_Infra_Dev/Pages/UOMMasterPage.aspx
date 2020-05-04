@@ -84,8 +84,10 @@
                                 </div>
 
                                 <div class="row m-3">
-                                    <label for="txtuom" class="w-50 text-right">Minimum Conversion: &nbsp</label>
-                                    <asp:TextBox ID="txt_minconversion" class="form-control-range w-50 rounded-0" runat="server" />
+                                    <label for="txtuomid" class="w-50 text-right">Base Uom : &nbsp</label>
+                                    <asp:DropDownList runat="server" ID="ddluom" CssClass="dropdown">
+                                        <asp:ListItem Text="----Select Uom----" Value="0"></asp:ListItem>
+                                    </asp:DropDownList>
                                 </div>
 
                                 <div class="row m-3">

@@ -88,38 +88,67 @@ namespace HSL_Infra_Dev.Services
             }
         }
 
-        //public string CreateLocation(Location location)
-        //{
-        //    using (SqlConnection connGetDistrict = ConnectionProvider.GetConnection())
-        //    {
-        //        try
-        //        {
-        //            SqlCommand cmdDistrict = new SqlCommand("SP_Location", connGetDistrict);
-        //            cmdDistrict.CommandType = CommandType.StoredProcedure;
-        //            cmdDistrict.CommandTimeout = 250;
-        //            cmdDistrict.Parameters.Add("@flag", SqlDbType.Char).Value = "CreateLocation";
-        //            cmdDistrict.Parameters.Add("@LOCATION_DESC", SqlDbType.Char).Value = location.Location_Description;
-        //            cmdDistrict.Parameters.Add("@DEPARTMENT_ID", SqlDbType.Int).Value = location.Department_id;
-        //            cmdDistrict.Parameters.Add("@ISACTIVE", SqlDbType.Char).Value = location.Is_Active ? "1" : "0";
+        public int CreateItem(Items itemsModel)
+        {
+            using (SqlConnection connGetDistrict = ConnectionProvider.GetConnection())
+            {
+                try
+                {
+                    SqlCommand cmdDistrict = new SqlCommand("SP_Item", connGetDistrict);
+                    cmdDistrict.CommandType = CommandType.StoredProcedure;
+                    cmdDistrict.CommandTimeout = 250;
+                    cmdDistrict.Parameters.Add("@flag", SqlDbType.Char).Value = "CreateItem";
+                    cmdDistrict.Parameters.Add("@ITEM_DESC", SqlDbType.NVarChar).Value = itemsModel.Item_Description;
+                    cmdDistrict.Parameters.Add("@UOM_ID", SqlDbType.Int).Value = itemsModel.Uom_Id;
+                    cmdDistrict.Parameters.Add("@QUANTITY", SqlDbType.Decimal).Value = itemsModel.Quantity;
+                    cmdDistrict.Parameters.Add("@OutID", SqlDbType.Int).Direction = ParameterDirection.Output;
 
-        //            SqlDataAdapter da = new SqlDataAdapter(cmdDistrict);
-        //            DataTable dt = new DataTable();
-        //            da.Fill(dt);
-        //            string result = dt.Rows[0]["Result"].ToString();
+                    cmdDistrict.ExecuteNonQuery();
+                    int ID = Convert.ToInt32(cmdDistrict.Parameters["@OutID"].Value);
 
-        //            return result;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            return null;
-        //        }
-        //        finally
-        //        {
-        //            if (connGetDistrict.State == ConnectionState.Open)
-        //                connGetDistrict.Close();
-        //        }
-        //    }
-        //}
+                    return ID;
+                }
+                catch (Exception ex)
+                {
+                    return 0;
+                }
+                finally
+                {
+                    if (connGetDistrict.State == ConnectionState.Open)
+                        connGetDistrict.Close();
+                }
+            }
+        }
+
+        public DataTable GetItemsDataTable()
+        {
+            using (SqlConnection connGetDistrict = ConnectionProvider.GetConnection())
+            {
+                try
+                {
+                    SqlCommand cmdDistrict = new SqlCommand("SP_Item", connGetDistrict);
+                    cmdDistrict.CommandType = CommandType.StoredProcedure;
+                    cmdDistrict.CommandTimeout = 250;
+                    cmdDistrict.Parameters.Add("@flag", SqlDbType.Char).Value = "GetItemDataTable";
+                    cmdDistrict.Parameters.Add("@OutID", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmdDistrict);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    
+                    return dt;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+                finally
+                {
+                    if (connGetDistrict.State == ConnectionState.Open)
+                        connGetDistrict.Close();
+                }
+            }
+        }
 
         //public int DeleteLocation(int location_id)
         //{

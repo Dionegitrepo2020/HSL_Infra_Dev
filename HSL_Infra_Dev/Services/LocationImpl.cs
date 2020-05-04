@@ -69,7 +69,7 @@ namespace HSL_Infra_Dev.Services
                     Location location = new Location();
                     foreach (DataRow row in dt.Rows)
                     {
-                        location.Id = Convert.ToInt32(row["ID"]);
+                        location.Id = Convert.ToInt32(row["LOCATION_ID"]);
                         location.Location_Description = row["LOCATION_DESC"].ToString();
                         location.Department_id = Convert.ToInt32(row["DEPARTMENT_ID"]);
                         location.Is_Active = Convert.ToBoolean(row["ISACTIVE"]);

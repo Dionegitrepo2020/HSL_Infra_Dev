@@ -69,13 +69,13 @@ namespace HSL_Infra_Dev.Pages
         protected global::System.Web.UI.WebControls.TextBox txt_unitfactor;
 
         /// <summary>
-        /// txt_minconversion control.
+        /// ddluom control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_minconversion;
+        protected global::System.Web.UI.WebControls.DropDownList ddluom;
 
         /// <summary>
         /// chkActive control.
