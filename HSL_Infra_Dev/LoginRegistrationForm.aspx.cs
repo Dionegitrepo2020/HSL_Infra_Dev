@@ -18,15 +18,17 @@ namespace HSL_Infra_Dev
         ILogin loginService = new LoginService();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["UserID"] != null && Session["CompanyID"] != null)
+                Response.Redirect("Pages/Dashboard.aspx");
         }
         protected void btnLogin_ServerClick(object sender, EventArgs e)
         {
+            Session["IsNewUser"] = "no";
             if (txt_UserName.Text == "admin" && txt_Password.Text == "admin")
             {
                 Session["UserID"] = null;
                 Session["CompanyID"] = null;
-                Session["IsRegisteredUser"] = false;
+                Session["IsNewUser"] = "yes";
                 Response.Redirect("Pages/Dashboard.aspx");
             }
             else if (chkAdmin.Checked)
@@ -40,11 +42,12 @@ namespace HSL_Infra_Dev
                     Company company = companyService.GetCompany(Convert.ToInt32(Result));
                     Session["UserID"] = company.Id;
                     Session["CompanyID"] = company.Id;
+                    Session["IsAdmin"] = true;
                     if (CheckLimit(company.Id, company.Id))
                         Response.Redirect("Pages/Dashboard.aspx");
                     else
                         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Failed",
-                        "alert('Maximum Number of Users LoggedIn');", true);
+                        "alert('Maximum Number of Users Exceeded');", true);
                 }
             }
             else
@@ -58,11 +61,12 @@ namespace HSL_Infra_Dev
                     Users users = userService.GetUsers(Convert.ToInt32(Result));
                     Session["UserID"] = users.User_Id;
                     Session["CompanyID"] = users.Company_Id;
+                    Session["IsAdmin"] = false;
                     if (CheckLimit(users.User_Id, users.Company_Id))
                         Response.Redirect("Pages/Dashboard.aspx");
                     else
                         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Failed",
-                        "alert('Maximum Number of Users LoggedIn');", true);
+                        "alert('Maximum Number of Users Exceeded');", true);
                 }
             }
         }

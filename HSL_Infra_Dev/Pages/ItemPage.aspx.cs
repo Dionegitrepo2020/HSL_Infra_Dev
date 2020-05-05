@@ -17,17 +17,31 @@ namespace HSL_Infra_Dev.Pages
         DataTable dataTable = new DataTable();
         IItem item = new ItemImpl();
         IUOM uomsService = new UOMImpl();
+        ILocation locationService = new LocationImpl();
+        IStock stockService = new StockImpl();
+
         ListtoDataTableConverter converter = new ListtoDataTableConverter();
         protected void Page_Load(object sender, EventArgs e)
         {
             dataTable.Columns.Add("ITEM_ID");
             dataTable.Columns.Add("ITEM_DESC");
-            dataTable.Columns.Add("UOM_ID");
-            //dataTable.Columns.Add("ISACTIVE");
-            dataTable.Columns.Add("CREATED_DATE");
-            dataTable.Columns.Add("MODIFIED_DATE");
+            dataTable.Columns.Add("LOCATION_ID");
+            dataTable.Columns.Add("TOTALQTY");
+            //dataTable.Columns.Add("CREATED_DATE");
+            //dataTable.Columns.Add("MODIFIED_DATE");
             LoadGridTable();
             LoadUoms();
+            Loadlocations();
+        }
+
+        private void Loadlocations()
+        {
+            List<Location> locations = new List<Location>();
+            locations = locationService.GetLocation();
+            foreach (var location in locations)
+            {
+                ddlLocations.Items.Add(new ListItem(location.Location_Description, location.Id.ToString()));
+            }
         }
 
         private void LoadUoms()
@@ -42,21 +56,40 @@ namespace HSL_Infra_Dev.Pages
 
         private void LoadGridTable()
         {
-            List<Items> items = item.GetItems();
-            dataTable = converter.ToDataTable(items, dataTable);
+            dataTable = item.GetItemsDataTable();
             grdvCrudOperation.DataSource = dataTable;
             grdvCrudOperation.DataBind();
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            //Location locations = new Location();
-            //locations.Location_Description = txt_loationdesc.Text;
-            //locations.Department_id = Convert.ToInt32(ddlDepts.SelectedItem.Value);
-            //locations.Is_Active = chkActive.Checked ? true : false;
-            //string result = location.CreateLocation(locations);
-            //dataTable.Rows.Clear();
-            //LoadGridTable();
+            Items itemsModel = new Items();
+            Stock stock = new Stock();
+            UOM uOM = new UOM();
+
+            //Inserting an Items
+            itemsModel.Item_Description = txt_Itemdesc.Text;
+            itemsModel.Uom_Id = Convert.ToInt32(ddluom.SelectedItem.Value);
+            itemsModel.Quantity = Convert.ToInt32(txtQuantity.Text);
+            int ItemID = item.CreateItem(itemsModel);
+
+            //Getting UOM Data for conversion item quantity
+            uOM = uomsService.GetUOM(itemsModel.Uom_Id);
+
+            stock.Location_Id= Convert.ToInt32(ddlLocations.SelectedItem.Value);
+            stock.Item_Id = ItemID;
+            stock.Base_Uom_Id = uOM.Id;
+            stock.Stock_Quantity = itemsModel.Quantity * uOM.unit_factor;
+
+            int result = stockService.CreateStock(stock);
+            if(result>0)
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Success",
+                        "alert('Item Added Successfully');", true);
+            else
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Success",
+                        "alert('Something went wrong');", true);
+            dataTable.Rows.Clear();
+            LoadGridTable();
         }
 
         protected void lnkDelete_Click(object sender, EventArgs e)
@@ -103,18 +136,9 @@ namespace HSL_Infra_Dev.Pages
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                TableCell deptCell = e.Row.Cells[2];
-                UOM uom = uomsService.GetUOM(Convert.ToInt32(deptCell.Text));
-                deptCell.Text = uom.uom_desc;
-                //TableCell statusCell = e.Row.Cells[2];
-                //if (statusCell.Text == "A")
-                //{
-                //    statusCell.Text = "Absent";
-                //}
-                //if (statusCell.Text == "P")
-                //{
-                //    statusCell.Text = "Present";
-                //}
+                TableCell locCell = e.Row.Cells[2];
+                Location location = locationService.GetLocation(Convert.ToInt32(locCell.Text));
+                locCell.Text = location.Location_Description;
             }
         }
     }

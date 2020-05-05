@@ -150,7 +150,7 @@ body {
 /*--------------------sidebar-brand----------------------*/
 
 .sidebar-wrapper .sidebar-brand {
-    padding: 10px 20px;
+    /*padding: 10px 20px;*/
     display: flex;
     align-items: center;
 }
@@ -162,6 +162,7 @@ body {
     }
 
     .sidebar-wrapper .sidebar-brand #close-sidebar {
+        padding: 10px 20px;
         cursor: pointer;
         font-size: 20px;
     }

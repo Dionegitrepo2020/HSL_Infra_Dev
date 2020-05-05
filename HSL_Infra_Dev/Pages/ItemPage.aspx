@@ -31,10 +31,10 @@
                             <Columns>
                                 <asp:BoundField DataField="ITEM_ID" HeaderText="ITEM ID" />
                                 <asp:BoundField DataField="ITEM_DESC" HeaderText="ITEM DESCRIPTION" />
-                                <asp:BoundField DataField="UOM_ID" HeaderText="UOM" />
-                                <%--<asp:BoundField DataField="ISACTIVE" HeaderText="ISACTIVE" />--%>
-                                <asp:BoundField DataField="CREATED_DATE" HeaderText="CREATED DATE" />
-                                <asp:BoundField DataField="MODIFIED_DATE" HeaderText="MODIFIED DATE" />
+                                <asp:BoundField DataField="LOCATION_ID" HeaderText="LOCATION" />
+                                <asp:BoundField DataField="TOTALQTY" HeaderText="QUANTITY" />
+                                <%--<asp:BoundField DataField="CREATED_DATE" HeaderText="CREATED DATE" />
+                                <asp:BoundField DataField="MODIFIED_DATE" HeaderText="MODIFIED DATE" />--%>
                                 <asp:TemplateField HeaderText="ACTION" ItemStyle-CssClass="text-center">
                                     <ItemTemplate>
                                         <i class="fa fa-lg fa-edit" id="edtRow" data-toggle="modal" data-target="#exampleModal" style="color: dodgerblue"></i>
@@ -62,20 +62,32 @@
                         <div class="modal-body">
                             <div class="container-fluid">
                                 <div class="row m-3">
-                                    <label for="txtitemid" class="w-50 text-right">Item ID: &nbsp</label>
+                                    <label for="txtitemid" class="w-50 text-right">Item ID : &nbsp</label>
                                     <asp:TextBox ID="txt_Itemid" class="form-control-range w-50 rounded-0" runat="server" />
                                 </div>
 
                                 <div class="row m-3">
-                                    <label for="txtitemdesc" class="w-50 text-right">Item Description: &nbsp</label>
+                                    <label for="txtitemdesc" class="w-50 text-right">Item Description : &nbsp</label>
                                     <asp:TextBox ID="txt_Itemdesc" class="form-control-range w-50 rounded-0" runat="server" />
                                 </div>
 
                                 <div class="row m-3">
-                                    <label for="txtuomid" class="w-50 text-right">Uom Id: &nbsp</label>
+                                    <label for="txtuomid" class="w-50 text-right">Location : &nbsp</label>
+                                    <asp:DropDownList runat="server" ID="ddlLocations" CssClass="dropdown">
+                                        <asp:ListItem Text="----Select Locations----" Value=""></asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+
+                                <div class="row m-3">
+                                    <label for="txtuomid" class="w-50 text-right">Uom : &nbsp</label>
                                     <asp:DropDownList runat="server" ID="ddluom" CssClass="dropdown">
                                         <asp:ListItem Text="----Select Uom----" Value=""></asp:ListItem>
                                     </asp:DropDownList>
+                                </div>
+
+                                <div class="row m-3">
+                                    <label for="txtitemdesc" class="w-50 text-right">Item Quantity : &nbsp</label>
+                                    <asp:TextBox ID="txtQuantity" class="form-control-range w-50 rounded-0" runat="server" />
                                 </div>
 
                                 <%--<div class="row m-3">
@@ -110,11 +122,11 @@
             $(document).on("click", "[id*=edtRow]", function () {
                 var tableRow = $(this).closest("tr").find("td").eq(3).text();
                 console.log("data is" + $("[id*=txt_DeptId]").val());
-                $("[id*=txt_Locationid]").val($(this).closest("tr").find("td").eq(0).text());
-                $("[id*=txt_loationdesc]").val($(this).closest("tr").find("td").eq(1).text());
-                var cat = $(this).closest("tr").find("td").eq(2).text();
-                $("[id*=ddlDepts] option").map(function () {
-                    if ($(this).text() == cat) return this;
+                $("[id*=txt_Itemid]").val($(this).closest("tr").find("td").eq(0).text());
+                $("[id*=txt_Itemdesc]").val($(this).closest("tr").find("td").eq(1).text());
+                var location = $(this).closest("tr").find("td").eq(2).text();
+                $("[id*=ddlLocations] option").map(function () {
+                    if ($(this).text() == location) return this;
                 }).prop('selected', true);
                 $("[id*=btnSave]").hide();
                 $("[id*=btnUpdate]").show();

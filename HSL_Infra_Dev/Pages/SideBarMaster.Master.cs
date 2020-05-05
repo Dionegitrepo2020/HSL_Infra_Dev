@@ -13,6 +13,7 @@ namespace HSL_Infra_Dev.Pages
     public partial class SideBarMaster : System.Web.UI.MasterPage
     {
         ICompany companyService = new CompanyImpl();
+        IUsers usersService = new UsersImpl();
         ILogin loginService = new LoginService();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,9 +25,58 @@ namespace HSL_Infra_Dev.Pages
                 MaterialIssue.HRef = "#";
                 MaterialRequest.HRef = "#";
             }
-            if(Convert.ToBoolean(Session["IsRegisteredUser"])) CheckSessions();
+            if(Session["IsNewUser"]==null) CheckSessions();
+            else if (!Session["IsNewUser"].Equals("yes")) CheckSessions();
             VisibilityAll(false);
             LoadNavItems();
+            LoadUserData();
+            LoadLicenseExpDate();
+            LoadMasters();
+        }
+
+        private void LoadMasters()
+        {
+            if (Convert.ToBoolean(Session["IsAdmin"]))
+            {
+                Masters.Visible = true;
+            }
+            else
+            {
+                Masters.Visible = false;
+            }
+        }
+
+        private void LoadLicenseExpDate()
+        {
+            Company company = companyService.GetCompany(Convert.ToInt32(Session["CompanyID"]));
+            foreach(var license in company.CompanyLicense)
+            {
+                DateTime CurrentDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
+                DateTime ExpiryDate = Convert.ToDateTime(license.ExpiryDate);
+                TimeSpan difference = ExpiryDate - CurrentDate;
+                if (Convert.ToInt32(license.NotificationDays) >= difference.TotalDays)
+                {
+                    WarnContent.Visible = true;
+                    WarnContentText.InnerHtml += "\n"+license.Product + " Expires in " + difference.TotalDays + " days | ";
+                }
+            }
+        }
+
+        private void LoadUserData()
+        {
+            Company company = companyService.GetCompany(Convert.ToInt32(Session["CompanyID"]));
+            Users users = usersService.GetUsers(Convert.ToInt32(Session["UserID"]));
+            if (Convert.ToBoolean(Session["IsAdmin"]))
+            {
+                User_Name.InnerHtml = company.CompanyName;
+                SidebarBrand.InnerHtml = company.CompanyName;
+            }
+            else
+            {
+                Company companyData = companyService.GetCompany(Convert.ToInt32(users.Company_Id));
+                User_Name.InnerHtml = users.Name;
+                SidebarBrand.InnerHtml = companyData.CompanyName;
+            }
         }
 
         private void VisibilityAll(bool Visibilty)

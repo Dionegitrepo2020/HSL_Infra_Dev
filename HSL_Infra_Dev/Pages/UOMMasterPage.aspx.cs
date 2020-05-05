@@ -28,6 +28,17 @@ namespace HSL_Infra_Dev.Pages
             dataTable.Columns.Add("CREATED_DATE");
             dataTable.Columns.Add("MODIFIED_DATE");
             LoadGridTable();
+            LoadUoms();
+        }
+
+        private void LoadUoms()
+        {
+            List<UOM> uoms = new List<UOM>();
+            uoms = UomService.GetUOMs();
+            foreach (var uom in uoms)
+            {
+                ddluom.Items.Add(new ListItem(uom.uom_desc, uom.Id.ToString()));
+            }
         }
 
         private void LoadGridTable()
@@ -44,7 +55,7 @@ namespace HSL_Infra_Dev.Pages
             uom.uom_key = txt_uomkey.Text;
             uom.uom_desc = txt_UomDesc.Text;
             uom.unit_factor = Convert.ToInt32(txt_unitfactor.Text);
-            uom.min_conversion = Convert.ToInt32(txt_minconversion.Text);
+            uom.min_conversion = Convert.ToInt32(ddluom.SelectedItem.Value);
             uom.is_active = chkActive.Checked ? true : false;
             string result = UomService.CreateUom(uom);
             dataTable.Rows.Clear();
@@ -76,7 +87,7 @@ namespace HSL_Infra_Dev.Pages
             uom.uom_key = txt_uomkey.Text;
             uom.uom_desc = txt_UomDesc.Text;
             uom.unit_factor = Convert.ToInt32(txt_unitfactor.Text);
-            uom.min_conversion = Convert.ToInt32(txt_minconversion.Text);
+            uom.min_conversion = Convert.ToInt32(ddluom.SelectedItem.Value);
             uom.is_active = chkActive.Checked ? true : false;
             string result = UomService.UpdateUom(uom);
             if (result.Equals("Updated"))

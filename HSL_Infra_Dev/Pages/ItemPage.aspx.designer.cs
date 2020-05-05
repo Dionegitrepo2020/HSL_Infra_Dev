@@ -51,6 +51,15 @@ namespace HSL_Infra_Dev.Pages
         protected global::System.Web.UI.WebControls.TextBox txt_Itemdesc;
 
         /// <summary>
+        /// ddlLocations control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLocations;
+
+        /// <summary>
         /// ddluom control.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace HSL_Infra_Dev.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddluom;
+
+        /// <summary>
+        /// txtQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtQuantity;
 
         /// <summary>
         /// btnSave control.
