@@ -127,12 +127,12 @@ namespace HSL_Infra_Dev.Pages
             login.UserId =Convert.ToInt32(Session["UserID"]);
             login.CompanyId = Convert.ToInt32(Session["CompanyID"]);
             bool logout = loginService.RemoveFromCount(login);
-            if (logout)
-            {
+            //if (logout)
+            //{
                 Session["UserID"] = null;
                 Session["CompanyID"] = null;
                 CheckSessions();
-            }
+            //}
         }
 
         private void CheckSessions()
