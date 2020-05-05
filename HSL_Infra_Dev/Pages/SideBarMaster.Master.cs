@@ -31,6 +31,19 @@ namespace HSL_Infra_Dev.Pages
             LoadNavItems();
             LoadUserData();
             LoadLicenseExpDate();
+            LoadMasters();
+        }
+
+        private void LoadMasters()
+        {
+            if (Convert.ToBoolean(Session["IsAdmin"]))
+            {
+                Masters.Visible = true;
+            }
+            else
+            {
+                Masters.Visible = false;
+            }
         }
 
         private void LoadLicenseExpDate()
