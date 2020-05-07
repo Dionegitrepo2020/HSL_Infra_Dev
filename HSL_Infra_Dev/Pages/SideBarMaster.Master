@@ -99,14 +99,14 @@
                         <li runat="server" id="InventoryAlert" class="alert alert-danger m-1" role="alert">Not Licensed
                         </li>
                         <li>
-                            <a runat="server" id="MaterialRequest" href="#">
+                            <a runat="server" id="MaterialRequest" href="MaterialRequest.aspx">
                                 <i class="fa fa-cart-arrow-down"></i>
                                 <span>Material Request</span>
                                 <span class="badge badge-pill badge-primary">0</span>
                             </a>
                         </li>
                         <li>
-                            <a runat="server" id="MaterialIssue" href="#">
+                            <a runat="server" id="MaterialIssue" href="MaterialIssue.aspx">
                                 <i class="fa fa-arrow-up"></i>
                                 <span>Material Issue</span>
                                 <span class="badge badge-pill badge-primary">0</span>
@@ -214,7 +214,7 @@
 
     <script src="../Scripts/bootstrap.bundle.min.js"></script>
     <script src="../Scripts/popper.min.js"></script>
-    <script src="../Scripts/jquery-3.0.0.min.js"></script>
+    <%--<script src="../Scripts/jquery-3.0.0.min.js"></script>--%>
     <script>
         window.addEventListener('beforeunload', (event) => {
             var message = 'You have started writing or editing a post.';

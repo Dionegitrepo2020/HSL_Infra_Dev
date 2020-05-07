@@ -62,6 +62,7 @@ namespace HSL_Infra_Dev.Services
                     cmdDistrict.CommandTimeout = 250;
                     cmdDistrict.Parameters.Add("@flag", SqlDbType.Char).Value = "GetItemById";
                     cmdDistrict.Parameters.Add("@ITEM_ID", SqlDbType.Char).Value = ItemId;
+                    cmdDistrict.Parameters.Add("@OutID", SqlDbType.Int).Direction = ParameterDirection.Output;
 
                     SqlDataAdapter da = new SqlDataAdapter(cmdDistrict);
                     DataTable dt = new DataTable();

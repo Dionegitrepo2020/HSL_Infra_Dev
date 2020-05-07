@@ -48,6 +48,7 @@ namespace HSL_Infra_Dev.Pages
 
         private void LoadLicenseExpDate()
         {
+            WarnContentText.InnerHtml = "";
             Company company = companyService.GetCompany(Convert.ToInt32(Session["CompanyID"]));
             foreach(var license in company.CompanyLicense)
             {
