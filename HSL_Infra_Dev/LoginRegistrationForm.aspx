@@ -52,12 +52,12 @@
                             <div class="tab-pane active" id="one" role="tabpanel" aria-labelledby="one-tab">
                                 <div class="form-group">
                                     <label for="uname1">Username</label>
-                                    <asp:TextBox runat="server" ID="txt_UserName" CssClass="form-control" required="true" />
+                                    <asp:TextBox runat="server" ID="txt_UserName" CssClass="form-control" required="true" Text="dioneomkar" />
                                     <div class="invalid-feedback">Please enter your username or email</div>
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <asp:TextBox runat="server" ID="txt_Password" CssClass="form-control" TextMode="Password" required="true" />
+                                    <asp:TextBox runat="server" ID="txt_Password" CssClass="form-control" TextMode="Password" required="true" Text="omkar123" />
                                     <div class="invalid-feedback">Please enter a password</div>
                                 </div>
                                 <asp:CheckBox runat="server" CssClass="custom-checkbox" Text="Login as admin" ID="chkAdmin" />

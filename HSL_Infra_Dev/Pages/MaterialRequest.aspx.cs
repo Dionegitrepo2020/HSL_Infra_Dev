@@ -31,10 +31,6 @@ namespace HSL_Infra_Dev.Pages
             dataTable.Columns.Add("ITEM_DESC");
             dataTable.Columns.Add("LOCATION_ID");
             dataTable.Columns.Add("TOTALQTY");
-            LoadGridTable();
-            LoadUserData();
-            LoadUoms();
-            Loadlocations();
             if (ViewState["RequestData"] == null)
             {
                 Requestdt.Columns.Add("Item_ID");
@@ -44,6 +40,13 @@ namespace HSL_Infra_Dev.Pages
                 Requestdt.Columns.Add("Quantity");
                 Requestdt.Columns.Add("Comment");
                 ViewState["RequestData"] = Requestdt;
+            }
+            if (!Page.IsPostBack)
+            {
+                LoadGridTable();
+                LoadUserData();
+                LoadUoms();
+                Loadlocations();
             }
         }
 

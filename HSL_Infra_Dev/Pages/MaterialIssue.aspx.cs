@@ -23,12 +23,22 @@ namespace HSL_Infra_Dev.Pages
         IUOM uomService = new UOMImpl();
         IUsers usersService = new UsersImpl();
         ICompany companyService = new CompanyImpl();
+        IStock stockService = new StockImpl();
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadUserData();
+            if (!Page.IsPostBack)
+            {
+                LoadUserData();
+                Loadlocations();
+            }
             DataTable dataTable = requestService.GetAllRequestHeader();
             grdvCrudOperation.DataSource = dataTable;
             grdvCrudOperation.DataBind();
+        }
+
+        private void Loadlocations()
+        {
+
         }
 
         private void LoadUserData()
@@ -81,20 +91,37 @@ namespace HSL_Infra_Dev.Pages
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                DropDownList DropDownLoc = (e.Row.FindControl("ddlLocation") as DropDownList);
+                BindLocations(DropDownLoc);
                 //Item Bind
                 TableCell ItemId = e.Row.Cells[3];
                 Items items = itemService.GetItem(Convert.ToInt32(ItemId.Text));
                 ItemId.Text = items.Item_Description;
-                
+
                 //Location Bind
                 TableCell LocId = e.Row.Cells[4];
                 Location location = locationService.GetLocation(Convert.ToInt32(LocId.Text));
                 LocId.Text = location.Location_Description;
 
                 //UOM Bind
-                TableCell UomId = e.Row.Cells[5];
+                TableCell UomId = e.Row.Cells[6];
                 UOM uom = uomService.GetUOM(Convert.ToInt32(UomId.Text));
                 UomId.Text = uom.uom_desc;
+
+                //Bind Issued Quantity
+                DataTable dt = requestService.GetAllIssueDetailById(Convert.ToInt32(e.Row.Cells[8]));
+            }
+        }
+
+        private void BindLocations(DropDownList DropDownLoc)
+        {
+            DropDownLoc.Items.Clear();
+            List<Location> locations = new List<Location>();
+            locations = locationService.GetLocation();
+            DropDownLoc.Items.Add(new ListItem("--Select Location--"));
+            foreach (var loc in locations)
+            {
+                DropDownLoc.Items.Add(new ListItem(loc.Location_Description, loc.Id.ToString()));
             }
         }
 
@@ -108,7 +135,7 @@ namespace HSL_Infra_Dev.Pages
             materialRequest.Department_Id = Convert.ToInt32(ddlDepartment.SelectedItem.Value);
             materialRequest.Description = txtDescription.Text;
             materialRequest.Comment = txtReqComment.Text;
-            DataTable dt= requestService.GetAllRequestDetailById(Convert.ToInt32(txtReqNo.Text));
+            DataTable dt = requestService.GetAllRequestDetailById(Convert.ToInt32(txtReqNo.Text));
             List<RequestItems> reqItemsList = new List<RequestItems>();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -133,6 +160,22 @@ namespace HSL_Infra_Dev.Pages
             }
             else ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Failed",
                        "alert('Something went wrong');", true);
+        }
+
+        protected void ddlLocation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList dropDownList = sender as DropDownList;
+
+            GridViewRow row = (GridViewRow)(sender as DropDownList).NamingContainer;
+            string Loc_id = ((DropDownList)row.FindControl("ddlLocation")).SelectedItem.Value;
+            Stock stock = stockService.getStockByLocation(Convert.ToInt32(row.Cells[2].Text), Convert.ToInt32(Loc_id));
+            UOM uOM = uomService.GetUOM(Convert.ToInt32(row.Cells[5].Text));
+            row.Cells[10].Text = (stock.Stock_Quantity / uOM.unit_factor).ToString();
+        }
+
+        protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            e.Row.Cells[5].Visible = false;
         }
     }
 }

@@ -106,6 +106,7 @@ namespace HSL_Infra_Dev.Services.InventoryServices
                             cmdDistrict.Parameters.Clear();
                             cmdDistrict.Parameters.Add("@flag", SqlDbType.Char).Value = "CreateIssueDtl";
                             cmdDistrict.Parameters.Add("@REQUEST_HDR_ID", SqlDbType.Int).Value = ID;
+                            cmdDistrict.Parameters.Add("@REQUEST_ID", SqlDbType.Int).Value = Items.Request_Id;
                             cmdDistrict.Parameters.Add("@ITEM_ID", SqlDbType.Int).Value = Items.Item_Id;
                             cmdDistrict.Parameters.Add("@UOM_ID", SqlDbType.Int).Value = Items.Uom_Id;
                             cmdDistrict.Parameters.Add("@TO_LOCATION", SqlDbType.Int).Value = Items.To_Location;
@@ -168,6 +169,36 @@ namespace HSL_Infra_Dev.Services.InventoryServices
                     cmdDistrict.CommandType = CommandType.StoredProcedure;
                     cmdDistrict.CommandTimeout = 250;
                     cmdDistrict.Parameters.Add("@flag", SqlDbType.Char).Value = "GetReqDtlById";
+                    cmdDistrict.Parameters.Add("@REQUEST_HDR_ID", SqlDbType.Int).Value = RequestId;
+                    cmdDistrict.Parameters.Add("@OutID", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmdDistrict);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+                finally
+                {
+                    if (connGetDistrict.State == ConnectionState.Open)
+                        connGetDistrict.Close();
+                }
+            }
+        }
+
+        public DataTable GetAllIssueDetailById(int RequestId)
+        {
+            using (SqlConnection connGetDistrict = ConnectionProvider.GetConnection())
+            {
+                try
+                {
+                    SqlCommand cmdDistrict = new SqlCommand("SP_Request", connGetDistrict);
+                    cmdDistrict.CommandType = CommandType.StoredProcedure;
+                    cmdDistrict.CommandTimeout = 250;
+                    cmdDistrict.Parameters.Add("@flag", SqlDbType.Char).Value = "GetIssDtlById";
                     cmdDistrict.Parameters.Add("@REQUEST_HDR_ID", SqlDbType.Int).Value = RequestId;
                     cmdDistrict.Parameters.Add("@OutID", SqlDbType.Int).Direction = ParameterDirection.Output;
 

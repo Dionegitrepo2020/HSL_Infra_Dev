@@ -14,5 +14,6 @@ namespace HSL_Infra_Dev.Interfaces
         int CreateIssue(MaterialRequest materialRequest);
         DataTable GetAllRequestHeader();
         DataTable GetAllRequestDetailById(int RequestId);
+        DataTable GetAllIssueDetailById(int RequestId);
     }
 }

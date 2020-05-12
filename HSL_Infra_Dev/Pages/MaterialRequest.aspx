@@ -39,7 +39,7 @@
                     <div class="col-sm-4">
                         <div class="input-group mb-3">
                             <label for="txtpono" class="col-form-label">Date :</label>
-                            <asp:TextBox class="form-control ml-1" placeholder="Date" runat="server" ID="txtDate" />
+                            <asp:TextBox class="form-control ml-1" placeholder="Date" runat="server" ID="txtDate" autocomplete="off"/>
                             <div class="input-group-append">
                                 <i class="input-group-text fa fa-calendar"></i>
                             </div>
@@ -48,7 +48,7 @@
                     <div class="col-sm-4">
                         <div class="input-group mb-3">
                             <label for="txtpono" class="col-form-label">Time :</label>
-                            <asp:TextBox class="form-control ml-1" placeholder="Date" runat="server" ID="txtTime" />
+                            <asp:TextBox class="form-control ml-1" placeholder="Date" runat="server" ID="txtTime" autocomplete="off"/>
                             <div class="input-group-append">
                                 <i class="input-group-text fa fa-clock-o"></i>
                             </div>
@@ -58,7 +58,7 @@
                     <div class="col-sm-4">
                         <div class="input-group mb-3">
                             <label for="txtpono" class="col-form-label">Requester Name :</label>
-                            <asp:TextBox class="form-control ml-1" runat="server" ID="txtRequesterName" />
+                            <asp:TextBox class="form-control ml-1" runat="server" ID="txtRequesterName" autocomplete="off"/>
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -78,13 +78,13 @@
                     <div class="col-sm-12">
                         <div class="input-group mb-3">
                             <label for="txtpono" class="col-form-label">Description :</label>
-                            <asp:TextBox class="form-control ml-1" placeholder="Description" runat="server" ID="txtDescription" />
+                            <asp:TextBox class="form-control ml-1" placeholder="Description" runat="server" ID="txtDescription" autocomplete="off"/>
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="input-group mb-3">
                             <label for="txtpono" class="col-form-label">Comments :</label>
-                            <asp:TextBox class="form-control ml-1" placeholder="Comments" runat="server" ID="txtReqComment" />
+                            <asp:TextBox class="form-control ml-1" placeholder="Comments" runat="server" ID="txtReqComment" autocomplete="off"/>
                         </div>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                                 <div class="form-group">
                                     <label for="txtpono" class="col-form-label">Item ID</label>
                                     <div class="input-group mb-3">
-                                        <asp:TextBox runat="server" class="form-control ml-1" placeholder="Item ID" ID="txtItemID" />
+                                        <asp:TextBox runat="server" class="form-control ml-1" placeholder="Item ID" ID="txtItemID" autocomplete="off"/>
                                         <div class="input-group-append">
                                             <i class="input-group-text fa fa-search" data-toggle="modal" data-target="#exampleModal"></i>
                                         </div>
@@ -113,7 +113,7 @@
                             <div class="col-sm-2">
                                 <div class="form-group">
                                     <label for="txtpono" class="col-form-label">Description</label>
-                                    <asp:TextBox ID="txtItemDesc" class="form-control rounded-0" runat="server" />
+                                    <asp:TextBox ID="txtItemDesc" class="form-control rounded-0" runat="server" autocomplete="off"/>
                                 </div>
                             </div>
 
@@ -138,14 +138,14 @@
                             <div class="col-sm-1">
                                 <div class="form-group">
                                     <label for="txtpono" class="col-form-label">Quantity</label>
-                                    <asp:TextBox ID="txtQuantity" class="form-control rounded-0" runat="server" />
+                                    <asp:TextBox ID="txtQuantity" class="form-control rounded-0" runat="server" autocomplete="off"/>
                                 </div>
                             </div>
 
                             <div class="col-sm-2">
                                 <div class="form-group">
                                     <label for="txtpono" class="col-form-label">Comment</label>
-                                    <asp:TextBox ID="txtComment" class="form-control rounded-0" runat="server" />
+                                    <asp:TextBox ID="txtComment" class="form-control rounded-0" runat="server" autocomplete="off"/>
                                 </div>
                             </div>
 

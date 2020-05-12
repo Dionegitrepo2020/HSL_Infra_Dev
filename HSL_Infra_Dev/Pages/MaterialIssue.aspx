@@ -47,7 +47,7 @@
                     <div class="col-sm-4">
                         <div class="input-group mb-3">
                             <label for="txtpono" class="col-form-label">Date :</label>
-                            <asp:TextBox class="form-control ml-1" placeholder="Date" runat="server" ID="txtDate" />
+                            <asp:TextBox class="form-control ml-1" placeholder="Date" runat="server" ID="txtDate" autocomplete="off" />
                             <div class="input-group-append">
                                 <i class="input-group-text fa fa-calendar"></i>
                             </div>
@@ -56,7 +56,7 @@
                     <div class="col-sm-4">
                         <div class="input-group mb-3">
                             <label for="txtpono" class="col-form-label">Time :</label>
-                            <asp:TextBox class="form-control ml-1" placeholder="Date" runat="server" ID="txtTime" />
+                            <asp:TextBox class="form-control ml-1" placeholder="Date" runat="server" ID="txtTime" autocomplete="off" />
                             <div class="input-group-append">
                                 <i class="input-group-text fa fa-clock-o"></i>
                             </div>
@@ -86,13 +86,13 @@
                     <div class="col-sm-12">
                         <div class="input-group mb-3">
                             <label for="txtpono" class="col-form-label">Description :</label>
-                            <asp:TextBox class="form-control ml-1" placeholder="Description" runat="server" ID="txtDescription" />
+                            <asp:TextBox class="form-control ml-1" placeholder="Description" runat="server" ID="txtDescription" autocomplete="off" />
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="input-group mb-3">
                             <label for="txtpono" class="col-form-label">Comments :</label>
-                            <asp:TextBox class="form-control ml-1" placeholder="Comments" runat="server" ID="txtReqComment" />
+                            <asp:TextBox class="form-control ml-1" placeholder="Comments" runat="server" ID="txtReqComment" autocomplete="off" />
                         </div>
                     </div>
                 </div>
@@ -106,15 +106,25 @@
                 <div class="row">
                     <div class="container-fluid" style="height: 200px; overflow: scroll;">
                         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-sm table-striped table-hover"
-                            OnRowDataBound="GridView1_RowDataBound" RowStyle-HorizontalAlign="Center">
+                            OnRowDataBound="GridView1_RowDataBound" RowStyle-HorizontalAlign="Center" OnRowCreated="GridView1_RowCreated">
                             <Columns>
                                 <asp:BoundField DataField="REQUEST_DTL_ID" HeaderText="REQUEST DETAIL ID" Visible="false" />
                                 <asp:BoundField DataField="REQUEST_HDR_ID" HeaderText="REQUEST ID" Visible="false" />
                                 <asp:BoundField DataField="ITEM_ID" HeaderText="ITEM ID" />
                                 <asp:BoundField DataField="ITEM_ID" HeaderText="ITEM" />
                                 <asp:BoundField DataField="TO_LOCATION" HeaderText="LOCATION" />
+                                <asp:BoundField DataField="UOM_ID" HeaderText="UOM"/>
                                 <asp:BoundField DataField="UOM_ID" HeaderText="UOM" />
                                 <asp:BoundField DataField="REQUEST_QUANTITY" HeaderText="REQUESTED QUANTITY" />
+                                <asp:BoundField HeaderText="ISSUED QUANTITY" />
+                                <asp:TemplateField HeaderText="SELECT LOCATION" ItemStyle-Width="100px" HeaderStyle-Wrap="false">
+                                    <ItemTemplate>
+                                        <asp:DropDownList runat="server" ID="ddlLocation" CssClass="custom-select-sm rounded-0 ml-1" AutoPostBack = "true" OnSelectedIndexChanged = "ddlLocation_SelectedIndexChanged">
+                                            <asp:ListItem Text="----Select Location----" Value=""></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:BoundField HeaderText="AVAILABLE QUANTITY" />
                                 <asp:TemplateField HeaderText="ITEM ISSUING" ItemStyle-Width="100px" HeaderStyle-Wrap="false">
                                     <ItemTemplate>
                                         <input type="text" class="form-control-range font-weight-bolder" value="0"
@@ -158,7 +168,6 @@
                                         <asp:TemplateField HeaderText="ACTION" ItemStyle-CssClass="text-center">
                                             <ItemTemplate>
                                                 <asp:Button runat="server" Text="select" OnClick="BtnSelect_ServerClick" />
-                                                <i id="BtnSelect" class="text-primary" data-dismiss="modal">Select</i>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>

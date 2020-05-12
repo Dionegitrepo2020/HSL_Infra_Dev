@@ -10,5 +10,6 @@ namespace HSL_Infra_Dev.Interfaces
     public interface IStock
     {
         int CreateStock(Stock stock);
+        Stock getStockByLocation(int Item_id, int Loc_id);
     }
 }
