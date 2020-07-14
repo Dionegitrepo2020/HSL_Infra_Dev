@@ -26,6 +26,7 @@ namespace HSL_Infra_Dev
             Session["IsNewUser"] = "no";
             if (txt_UserName.Text == "admin" && txt_Password.Text == "admin")
             {
+                Session["IsAdmin"] = true;
                 Session["UserID"] = null;
                 Session["CompanyID"] = null;
                 Session["IsNewUser"] = "yes";

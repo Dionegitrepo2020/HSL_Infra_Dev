@@ -116,7 +116,7 @@
                                 <asp:BoundField DataField="UOM_ID" HeaderText="UOM"/>
                                 <asp:BoundField DataField="UOM_ID" HeaderText="UOM" />
                                 <asp:BoundField DataField="REQUEST_QUANTITY" HeaderText="REQUESTED QUANTITY" />
-                                <asp:BoundField HeaderText="ISSUED QUANTITY" />
+                                <asp:BoundField HeaderText="ISSUED QUANTITY" ItemStyle-CssClass="issuedqty" />
                                 <asp:TemplateField HeaderText="SELECT LOCATION" ItemStyle-Width="100px" HeaderStyle-Wrap="false">
                                     <ItemTemplate>
                                         <asp:DropDownList runat="server" ID="ddlLocation" CssClass="custom-select-sm rounded-0 ml-1" AutoPostBack = "true" OnSelectedIndexChanged = "ddlLocation_SelectedIndexChanged">
@@ -198,6 +198,32 @@
                 });
             });
         </script>
+        <script type="text/javascript">
+            $(function () {
+                $("[id*=txtQuantity]").val("0");
+            });
+            $("body").on("change keyup", "[id*=issqty]", function () {
+                //Check whether Quantity value is valid Float number.
+                var quantity = parseFloat($.trim($(this).val()));
+                if (isNaN(quantity)) {
+                    quantity = 0;
+                }
+
+                //Update the Quantity TextBox.
+                $(this).val(quantity);
+
+                //Calculate and update Row Total.
+                var row = $(this).closest("tr");
+                $("[id*=lblTotal]", row).html(parseFloat($(".issuedqty", row).html()) * parseFloat($(this).val()));
+
+                //Calculate and update Grand Total.
+                var grandTotal = 0;
+                $("[id*=lblTotal]").each(function () {
+                    grandTotal = grandTotal + parseFloat($(this).html());
+                });
+                $("[id*=lblGrandTotal]").html(grandTotal.toString());
+            });
+</script>
     </body>
     </html>
 </asp:Content>

@@ -109,7 +109,15 @@ namespace HSL_Infra_Dev.Pages
                 UomId.Text = uom.uom_desc;
 
                 //Bind Issued Quantity
-                DataTable dt = requestService.GetAllIssueDetailById(Convert.ToInt32(e.Row.Cells[8]));
+                List<RequestItems> ItemsList = requestService.GetAllIssueDetailById(Convert.ToInt32(txtReqNo.Text));
+                var TotalQty = from item in ItemsList
+                                      group item by new {item.Request_Id,item.Item_Id } into itemGroup
+                                      select new
+                                      {
+                                          ITEM = itemGroup.Key,
+                                          QTY = itemGroup.Sum(x => x.Issued_Quantity),
+                                      };
+                e.Row.Cells[8].Text = TotalQty.Where(x => x.ITEM.Item_Id == Convert.ToInt32(e.Row.Cells[2].Text)).Select(x => x.QTY).FirstOrDefault().ToString();
             }
         }
 
@@ -147,7 +155,7 @@ namespace HSL_Infra_Dev.Pages
                 Items.Request_Quantity = Convert.ToDecimal(dt.Rows[i]["REQUEST_QUANTITY"]);
                 HtmlInputText textbox = ((HtmlInputText)GridView1.Rows[i].FindControl("issqty"));
                 Items.Issued_Quantity = Convert.ToDecimal(textbox.Value);
-                Items.Comment = GridView1.Rows[i].Cells[5].Text;
+                Items.Comment = GridView1.Rows[i].Cells[12].Text;
                 reqItemsList.Add(Items);
             }
             materialRequest.RequestItemsList = reqItemsList;

@@ -189,7 +189,7 @@ namespace HSL_Infra_Dev.Services.InventoryServices
             }
         }
 
-        public DataTable GetAllIssueDetailById(int RequestId)
+        public List<RequestItems> GetAllIssueDetailById(int RequestId)
         {
             using (SqlConnection connGetDistrict = ConnectionProvider.GetConnection())
             {
@@ -205,7 +205,20 @@ namespace HSL_Infra_Dev.Services.InventoryServices
                     SqlDataAdapter da = new SqlDataAdapter(cmdDistrict);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
-                    return dt;
+                    List<RequestItems> ItemList = new List<RequestItems>();
+                    ItemList = (from DataRow dr in dt.Rows
+                                      select new RequestItems()
+                                      {
+                                          Request_Dtl_Id = Convert.ToInt32(dr["ISSUE_DTL_ID"]),
+                                          Request_Id = Convert.ToInt32(dr["REQUEST_ID"]),
+                                          Item_Id = Convert.ToInt32(dr["ITEM_ID"]),
+                                          To_Location=Convert.ToInt32(dr["TO_LOCATION"]),
+                                          Request_Quantity=Convert.ToDecimal(dr["REQUEST_QUANTITY"]),
+                                          Issued_Quantity=Convert.ToDecimal(dr["ISSUED_QUANTITY"]),
+                                          Created_Date = Convert.ToDateTime(dr["CREATED_DATE"]),
+                                          Modified_Date = Convert.ToDateTime(dr["MODIFIED_DATE"])
+                                      }).ToList();
+                    return ItemList;
                 }
                 catch (Exception ex)
                 {

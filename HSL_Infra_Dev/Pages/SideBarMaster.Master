@@ -24,8 +24,8 @@
         </a>
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content">
-                <div class="sidebar-brand">
-                    <img class="img-responsive img-rounded" width="50" height="50" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+                <div class="sidebar-brand p-2">
+                    <img class="img-responsive img-rounded mr-2" width="40" height="40" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
                         alt="User picture">
                     <a runat="server" id="SidebarBrand" href="#">INFRA DEV</a>
                     <div id="close-sidebar">

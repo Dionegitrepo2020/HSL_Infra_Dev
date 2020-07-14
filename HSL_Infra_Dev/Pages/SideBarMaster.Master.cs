@@ -29,7 +29,7 @@ namespace HSL_Infra_Dev.Pages
             else if (!Session["IsNewUser"].Equals("yes")) CheckSessions();
             VisibilityAll(false);
             LoadNavItems();
-            LoadUserData();
+            //LoadUserData();
             LoadLicenseExpDate();
             LoadMasters();
         }
@@ -57,8 +57,16 @@ namespace HSL_Infra_Dev.Pages
                 TimeSpan difference = ExpiryDate - CurrentDate;
                 if (Convert.ToInt32(license.NotificationDays) >= difference.TotalDays)
                 {
-                    WarnContent.Visible = true;
-                    WarnContentText.InnerHtml += "\n"+license.Product + " Expires in " + difference.TotalDays + " days | ";
+                    if (difference.TotalDays <= 0)
+                    {
+                        WarnContent.Visible = true;
+                        WarnContentText.InnerHtml += "\n" + license.Product + " Expired | ";
+                    }
+                    else
+                    {
+                        WarnContent.Visible = true;
+                        WarnContentText.InnerHtml += "\n" + license.Product + " Expires in " + difference.TotalDays + " days | ";
+                    }
                 }
             }
         }
